@@ -1,0 +1,6 @@
+---
+api_key:  "your API Key"
+api_url:  "http://lgapi-us.libapps.com/1.1/guides/"
+site_id:  17
+solr_uri: "http://localhost:8983/solr/blacklight-core"
+solr_batch_size: 100
