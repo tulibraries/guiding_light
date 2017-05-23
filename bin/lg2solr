@@ -2,6 +2,7 @@
 
 require "thor"
 require "harvest_libguides"
+require "analyze_libguides"
 
 class Lg2Solr < Thor
   desc "import URL", "Import single LibGuides document at URL to running Solr endpoint"
