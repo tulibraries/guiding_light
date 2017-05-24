@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'nokogiri'
-require 'pry'
 
 module AnalyzeLibguides 
   def self.has_summon_link?(libguide_doc)
