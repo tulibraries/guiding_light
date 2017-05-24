@@ -1,4 +1,25 @@
-# Harvest LibGuides
+# Guiding Light: Search LibGuides with Blacklight
+
+
+## Getting Started
+
+## Hacking on the gem
+
+
+`git clone https://github.com/tulibraries/guiding_light`
+
+`cd guiding_light`
+
+`bundle install`
+
+:hammer: :computer: :nut_and_bolt: :computer: :hammer:
+
+
+
+## Running the tests
+
+`rspec`
+
 
 Rake file to ingest LibGuides file data into Solr. Presumes the LibGuides file has unique headers
 
@@ -23,3 +44,5 @@ ruby bin/libguides2solr.rb import URL_OF_SITE
 ```sh
 ruby bin/libguides2solr.rb harvest http://guides.temple.edu/sitemap.xml
 ```
+
+
