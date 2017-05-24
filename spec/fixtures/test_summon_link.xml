@@ -1,0 +1,877 @@
+	<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- BEGIN: writeHead() -->
+        
+		<title>Test - Research Guides at Temple University</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="robots" content="noarchive" />
+<!--AUTO GENERATED DUBLIN CORE METADATA-->
+<meta name="DC.Title" content="Test Research Guides" />
+<meta name="DC.Creator" content="Frodo Baggins" />
+<meta name="DC.Subject" content="Example" />
+<meta name="DC.Description" content="This guide provides a test fixture." />
+<meta name="DC.Publishers" content="Temple University" />
+<meta name="DC.Rights" content="Copyright Temple University 2017" />
+<meta name="DC.Language" content="en" />
+<meta name="DC.Identifier" scheme="URI" content="http://guides.temple.edu/test" />
+<meta name="DC.Date.Created" scheme="ISO8601" content="Mar 22, 2017" />
+<meta name="DC.Date.Modified" scheme="ISO8601" content="Mar 22, 2017" />
+
+		<meta property="og:title" content="Test Research Guides">
+		<meta property="og:description" content="This guide provides test fixture.">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="http://guides.temple.edu/test">
+		<meta name="twitter:card" content="summary_test_image">
+		<meta name="twitter:site" content="@test">
+        <link rel="stylesheet" href="/web/jquery/css/1.8.24_themes_base_jquery-ui.css" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+				<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+				<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css">
+            <link rel="stylesheet" href="/web/css1.15.13/lg-public.min.css" />
+        <!--[if lt IE 9]>
+        <link rel="stylesheet" href="/web/css1.15.13/springshare.public.ie8hacks.css" />
+        <![endif]-->
+        <script type="text/javascript" src="/web/jquery/js/1.12.1_jquery.min.js"></script>
+        <script type="text/javascript" src="/web/jquery/js/1.9.2_jquery-ui.min.js"></script>
+            <script type="text/javascript" src="/web/js1.15.13/lg-public.min.js"></script>
+		<style>/* =========================================== */
+                        /* bootstrap overrides */
+                        /* =========================================== */
+                        #s-lg-tabs-container .nav-tabs > li > a,
+                        #s-lg-tabs-container .nav-tabs > li > button,
+                        #s-lg-tabs-container .nav-pills > li > a,
+                        #s-lg-tabs-container .nav-pills > li > button {
+                            border: 1px solid transparent;
+                                -webkit-border-radius: 4px 4px 0 0;
+                                -moz-border-radius: 4px 4px 0 0;
+                                border-radius: 4px 4px 0 0;
+                            background-color: #406d9a;
+                            color: #ffffff;
+                            font-weight: bold;
+                            padding: 4px 15px;
+                        }
+                        #s-lg-tabs-container .nav-tabs {
+                            border-bottom: 0;
+                        }
+                        #s-lg-tabs-container .nav-tabs > li#s-lg-admin-tab-add > a {
+                            -webkit-border-radius: 4px 4px 0 0;
+                            -moz-border-radius: 4px 4px 0 0;
+                            border-radius: 4px 4px 0 0;
+                        }
+                        #s-lg-tabs-container .nav-tabs > li > a:hover,
+                        #s-lg-tabs-container .nav-tabs > li > button:hover,
+                        #s-lg-tabs-container .nav-pills > li > a:hover,
+                        #s-lg-tabs-container .nav-pills > li > button:hover {
+                            border: 1px solid transparent;
+                                -webkit-border-radius: 4px 4px 0 0;
+                                -moz-border-radius: 4px 4px 0 0;
+                                border-radius: 4px 4px 0 0;
+                            background-color: #2a3a53;
+                            color: #fafafa;
+                        }
+                        #s-lg-tabs-container .nav-tabs > .active > a,
+                        #s-lg-tabs-container .nav-tabs > .active > button,
+                        #s-lg-tabs-container .nav-pills > .active > a,
+                        #s-lg-tabs-container .nav-pills > .active > button {
+                            color: #fafafa;
+                            cursor: default;
+                            background-color: #2a3a53;
+                            border: 1px solid transparent;
+                                -webkit-border-radius: 4px 4px 0 0;
+                                -moz-border-radius: 4px 4px 0 0;
+                                border-radius: 4px 4px 0 0;
+                            border-bottom-color: transparent;
+                            font-weight: bold;
+                        }
+                        #s-lg-tabs-container .nav-tabs > .active > .s-lg-subtab-ul > .active > a,
+                        #s-lg-tabs-container .nav-tabs > .active > .s-lg-subtab-ul > .active > button {
+                            color: #fafafa;
+                            cursor: default;
+                            background-color: #2a3a53;
+                            border-bottom-color: transparent;
+                        }
+                        #s-lg-tabs-container .nav-tabs > .active > a:hover,
+                        #s-lg-tabs-container .nav-pills > .active > a:hover,
+                        #s-lg-tabs-container .nav-tabs > .active > button:hover,
+                        #s-lg-tabs-container .nav-pills > .active > button:hover {
+                            color: #fafafa;
+                            cursor: pointer;
+                            background-color: #2a3a53;
+                            border: 1px solid transparent;
+                                -webkit-border-radius: 4px 4px 0 0;
+                                -moz-border-radius: 4px 4px 0 0;
+                                border-radius: 4px 4px 0 0;
+                            border-bottom-color: transparent;
+                            font-weight: bold;
+                        }
+                        #s-lg-tabs-container .nav .dropdown-toggle .caret {
+                            border-top-color: #e1e1e1;
+                        }
+                        #s-lg-tabs-container .nav-tabs button.dropdown-toggle .caret {
+                            margin-left: 2px;
+                            margin-top: -3px;
+                        }
+                        #s-lg-tabs-container .nav-tabs > li > a.s-lg-tab-drop {
+                            border-radius: 0 4px 0 0;
+                            padding: 4px 6px 4px 3px;
+                            border-left: 1px solid transparent;
+                        }
+                        #s-lg-tabs-container .nav-tabs > li > button.s-lg-tab-drop {
+                            border-radius: 0 4px 0 0;
+                            padding: 4px 6px 0px 3px;
+                            border-left: 1px solid transparent;
+                            margin-right: 2px;
+                        }
+                        #s-lg-tabs-container .nav-tabs > li > a.s-lg-tab-drop:hover {
+                            border-radius: 0 4px 0 0;
+                            border-left: 1px solid #bbb;
+                            padding: 4px 6px 4px 3px;
+                        }
+                        #s-lg-tabs-container .nav-tabs > li > button.s-lg-tab-drop:hover {
+                            border-radius: 0 4px 0 0;
+                            border-left: 1px solid #bbb;
+                            padding: 4px 6px 0px 3px;
+                        }
+                        #s-lg-tabs-container .nav-tabs > li > a.s-lg-tab-top-link,
+                        #s-lg-tabs-container .nav-tabs > li > a.s-lg-tab-top-link:hover,
+                        #s-lg-tabs-container .nav-tabs > li > button.s-lg-tab-top-link,
+                        #s-lg-tabs-container .nav-tabs > li > button.s-lg-tab-top-link:hover {
+                            border-radius: 4px 0 0 0;
+                            font-weight: bold;
+                            padding: 4px 5px 4px 10px;
+                        }
+                        .nav-tabs > li > a.s-lg-tab-top-link,
+                        .nav-tabs > li > button.s-lg-tab-top-link {
+                            margin-right: 0px;
+                        }
+
+                        #s-lg-tabs-container .nav-pills > li > a.s-lg-tab-drop,
+                        #s-lg-tabs-container .nav-pills > li > button.s-lg-tab-drop {
+                            border-radius: 0 4px 0 0;
+                            padding: 4px 8px 4px 8px;
+                            border-left: 1px solid transparent;
+                            position: absolute;
+                            right: 0;
+                        }
+                        #s-lg-tabs-container .nav-pills > li > a.s-lg-tab-drop:hover,
+                        #s-lg-tabs-container .nav-pills > li > button.s-lg-tab-drop:hover {
+                            border-radius: 0 4px 0 0;
+                            border-left: 1px solid #bbb;
+                            padding: 4px 8px 4px 8px;
+                        }
+                        #s-lg-tabs-container .nav-pills > li > a.s-lg-tab-top-link,
+                        #s-lg-tabs-container .nav-pills > li > a.s-lg-tab-top-link:hover,
+                        #s-lg-tabs-container .nav-pills > li > button.s-lg-tab-top-link,
+                        #s-lg-tabs-container .nav-pills > li > button.s-lg-tab-top-link:hover {
+                            width: 100%;
+                            float: left;
+                            border-radius: 4px 0 0 0;
+                            font-weight: bold;
+                            padding: 4px 15px 4px 15px;
+                        }#s-lg-guide-tabs-title-bar { border-top: 1px solid #2a3a53; }
+                    .s-lib-box {
+                        border-color: #dbd8d8;
+                        border-width: 1px;
+                        box-shadow: 0 8px 6px -6px #AAAAAA;border-radius: 4px 4px 4px 4px;
+                        background-color: #fdfdfd;
+                    }
+                    .s-lib-box-std .s-lib-box-title {
+                        background-color: #fafafa;background-image: none;
+                        color: #303030;
+                        border-bottom: 1px solid #dbd8d8;
+                    }
+                    .s-lib-box .s-lib-box-title {
+                        background-color: #fafafa;background-image: none;
+                        color: #303030;
+                        border-bottom: 1px solid #dbd8d8;;
+                        border-radius: 3px 3px 0px 0px;
+                    }
+                    .s-lib-box .s-lg-box-footer {
+                    border-radius: 0px 0px 3px 3px;
+                    }</style>
+		<!-- BEGIN: CUSTOM HEAD SYSTEM JS/CSS -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+<style type="text/css">@media (min-width: 1200px)
+.container {width: 1200px;}
+
+#s-lib-banner-img {
+    width: auto;
+padding: 10px;
+    height: 75px;
+    background-color: #9E1B34;
+}
+.header-search{
+
+	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
+	padding: ;
+	height: 80px;
+	color: #ffffff;
+	box-sizing: border-box;
+background-color: #9E1B34;width:100%;
+}
+
+.header-search .header-limiter {
+	max-width: 1200px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+/* Logo */
+
+.header-search .header-limiter h1 {
+	float: left;
+	font: normal 28px Cookie, Arial, Helvetica, sans-serif;
+	line-height: 40px;
+	margin: 0;
+}
+
+.header-search .header-limiter h1 span {
+	color: #5383d3;
+}
+
+/* The header links */
+
+.header-search .header-limiter a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.header-search .header-limiter nav {
+	font:16px Arial, Helvetica, sans-serif;
+	line-height: 40px;
+	float: left;
+	margin: 0 0 0 60px;
+	padding: 0;
+}
+
+.header-search .header-limiter nav a {
+	display: inline-block;
+	padding: 0 5px;
+	text-decoration:none;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: normal;
+	opacity: 0.9;
+}
+
+.header-search .header-limiter nav a:hover {
+	opacity: 1;
+}
+
+.header-search .header-limiter nav a.selected {
+	color: #608bd2;
+	pointer-events: none;
+	opacity: 1;
+}
+
+/* The search box */
+
+.header-search .header-limiter form {
+	float:right;
+	position: relative;
+	right: 30px;
+	margin-left: 40px;
+	border-radius: 3px;
+	background-color:  #3a3c3e;
+	width: 44px;
+	height: 39px;
+	cursor: pointer;
+
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* CSS search icon */
+
+.header-search .header-limiter form:before {
+	position: absolute;
+	content: '';
+	border-radius: 50%;
+	border: 2px solid #fff;
+	width: 9px;
+	height: 9px;
+	top: 12px;
+	left: 14px;
+}
+
+.header-search .header-limiter form:after {
+	position: absolute;
+	content: '';
+	background-color: #fff;
+	width: 2px;
+	height: 8px;
+	top: 22px;
+	left: 26px;
+	-webkit-transform: rotate(-44deg);
+	-moz-transform: rotate(-44deg);
+	transform: rotate(-44deg);
+}
+
+/* The search box */
+
+.header-search .header-limiter form input {
+	display: none;
+	position: absolute;
+	right: 42px;
+	padding: 11px 12px 9px;
+	border: none;
+	width: 210px;
+	border-radius: 2px 0 0 2px;
+	height: 39px;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+/* Making the header responsive. */
+
+@media all and (max-width: 400px) {
+
+#s-lib-banner-img {
+    width: auto;
+padding: 5px 0px 8px 0px;
+    height: 65px;
+    background-color: #9E1B34;
+}
+
+	.header-search {
+		padding: 15px;
+		position: relative;
+	}
+
+	.header-search .header-limiter h1 {
+		float:none;
+		font-size: 24px;
+		line-height: 1;
+	}
+
+	.header-search .header-limiter nav {
+		text-align: center;
+		float: none;
+		margin: 0;
+	}
+
+	.header-search .header-limiter nav a {
+		font-size: 13px;
+	}
+
+	.header-search .header-limiter form {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+	}
+
+}
+
+/*#libchat_54bdf084dc3e8415767f4958ac806c00 {margin: none;line-height: 1;position: absolute;top: 2.5em;right: 1em;font-size: 1.2em;display: block;text-decoration: none !important; padding-left: 1.8em;padding: 0 15em 0 2em; font-weight: normal; color: #fff !important; border: 0;width: auto; border-radius: 0; text-shadow: none; background-image:url();background-repeat: no-repeat;background-position: top left;}
+*/
+
+
+.s-lg-guide-body, .s-lib-public-body{
+	padding:0;background-color: #fdfdfd;
+	font-size: 13px;
+}
+a{
+	color:#0A619F;
+}
+.panel-default> .panel-heading .badge {
+     background-color: #8B8589;
+}
+#s-lg-guide-main {
+	padding-top: 10px;
+}
+.btn-info {
+	color: #fff;background-color: #406d9a;border-color: #406d9a;
+}
+
+/****Guides Header Research Guides****/
+#s-lib-public-header-title{
+	margin-top: 10px; font-size: 26px;font-weight: bold;font-family: 'Droid sans', serif;
+}
+#s-lib-bc .breadcrumb, #s-lib-admin-bc .breadcrumb {
+	margin: 14px 0 10px 0;font-weight: bold;font-size: 10px;padding: 0px; border-radius: 0px;font-family: 'Droid Sans', sans-serif;
+	}
+	ol.breadcrumb li {
+		font-size: 1.3em;  letter-spacing: 1px;
+		}
+		ol.breadcrumb li a {
+			Font-weight: normal; padding:2px;
+			}ol.breadcrumb li a:hover { border-radius: 0px; text-decoration:none;
+				}
+				.breadcrumb>.active {
+					color: #ffffff;}
+					#s-lg-hp-nav-bottom, #s-lg-az-nav-bottom, #s-lg-srch-nav-bottom {
+						padding: 10px; border-bottom-left-radius: 5px;    border-bottom-right-radius: 5px;    background-color: #f7f7f7;
+					}
+
+
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus { 
+   color: rgb(255, 255, 255);    background-color: #406d9a;
+   }
+   .panel-heading {
+   	padding: 10px 15px;
+   	}
+   	#s-lg-guide-header {}
+   	#s-lg-guide-name {font-size:25px;font-weight: bold;font-family: 'Droid sans', serif;color: #333333;
+
+   	}
+
+   	/**individual boxes and box headers**/
+   	.s-lib-box {
+   		color:#222222;}
+   	.s-lib-box .s-lib-box-title {
+   		font-family: 'Droid Sans', sans-serif;background: #eeeeee; /* Old browsers */background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee 100%); /* IE10+ */background: linear-gradient(to bottom,  #eeeeee 0%,#eeeeee 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */color: #494949;font-size: 1.1em;border-radius: 0px;}
+
+   		/**tabs**/
+   	#s-lg-tabs-container .nav-tabs > li > a, #s-lg-tabs-container .nav-pills > li > a {
+   		letter-spacing:.5px;}
+   		.affix {
+   			position: fixed; top:0; z-index:3;opacity: 0.90;}
+   			/****search boxes****/
+   			form .element-invisible { 
+   			  position:absolute !important;  clip:rect(1px 1px 1px 1px);  clip:rect(1px,1px,1px,1px); overflow:hidden; height:1px;}
+   			  .search input[type="text"] {
+   			   width: 100%; padding: 5px 0 5px 10px;border: 1px solid grey;font-weight: bold;border-radius: 3px;height: 40px;}
+   			   .search input[type="submit"] {display: block;margin: 5px auto;	height: 30px;	border: none;	background: #a90329; 
+   			   	/* Old browsers */background: -moz-linear-gradient(top,  #a90329 0%, #8f0222 44%, #6d0019 100%); 
+   			   	/* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a90329), color-stop(44%,#8f0222), color-stop(100%,#6d0019)); 
+   			   	/* Chrome,Safari4+ */background: -webkit-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); 
+   			   	/* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%);
+   			   	 /* Opera 11.10+ */background: -ms-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%);
+   			   	  /* IE10+ */background: linear-gradient(to bottom,  #a90329 0%,#8f0222 44%,#6d0019 100%); 
+   			   	  /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 );
+   			   	  /* IE6-9 */font-size:14px;color: #ffffff;border: 1px solid grey;border-radius: 3px;letter-spacing: 1px;}
+   			   	  #s-lg-guide-search-box {
+   			   	  	display:none;}
+
+   			   	  	/**tables**/
+
+   			   	  	table {
+   			   	  		border-collapse: collapse;}
+
+   			   	  		/****footer from Chris in DLI****/
+
+   			   	  		****footer*****/#footer-wrapper{padding:0;}@media (min-width:768px){#footer-wrapper.container{width:750px;padding-left:0;padding-right:0;}}@media (min-width:992px){#footer-wrapper.container{width:970px;padding-left:0;padding-right:0;}}@media (min-width:1200px){#footer-wrapper.container{width:1170px;padding-left:0;padding-right:0;}.panels-flexible-region-site_footer-center{margin-left:42px;}}.panels-flexible-region.panels-flexible-region-site_footer-left.panels-flexible-region-first {float:left;}.panels-flexible-region-site_footer-center{float:left;}@font-face {  font-family: "BebasNeueRegular";  src: url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/BebasNeue-webfont.eot");  src: url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/BebasNeue-webfont.eot?#iefix") format("embedded-opentype"), url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/BebasNeue-webfont.woff") format("woff"), url("fonts/BebasNeue-webfont.ttf") format("truetype"), url("fonts/BebasNeue-webfont.svg#BebasNeueRegular") format("svg");  font-weight: normal !important;  font-style: normal !important;}@font-face {  font-family: "Droid";  src: url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/droidsans-webfont.eot");  src: url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/droidsans-webfont.eot?#iefix") format("embedded-opentype"), url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/droidsans-webfont.woff") format("woff"), url("fonts/droidsans-webfont.ttf") format("truetype"), url("fonts/droidsans-webfont.svg#Droid") format("svg");  font-weight: normal !important;  font-style: normal !important;}@font-face {  font-family: "DroidBld";  src: url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/droidsans-bold-webfont.eot");  src: url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/droidsans-bold-webfont.eot?#iefix") format("embedded-opentype"), url("http://library.temple.edu/sites/all/themes/templelibrary_responsive/fonts/droidsans-bold-webfont.woff") format("woff"), url("fonts/droidsans-bold-webfont.ttf") format("truetype"), url("fonts/droidsans-bold-webfont.svg#DroidBld") format("svg");  font-weight: normal !important;  font-style: normal !important;}#footer {  margin-top: 0px;  background-color: #222222;  color: white;  padding-bottom: 28px;  font-family: BebasNeueRegular;  width: 100%;}#footer .identity {  position: relative;  top: -10px;  font-size: 1.375em;  line-height: 1.2em;  margin-left: 42px;}#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {  color: white;  font-family: arial !important;  font-size: 1.125em;  letter-spacing: 0.075em;}#footer p, #footer div, #footer a {  color: white;  font-family: Arial !important;}#footer h2 {  font-size: 1.375em;  line-height: 1.2em;  font-weight: 100;}/****footer*****/#footer-wrapper{  padding:0;}@media (min-width:768px){  #footer-wrapper.container{    width:750px;padding-left:0;padding-right:0;  }}@media (min-width:992px){  #footer-wrapper.container{    width:970px;padding-left:0;padding-right:0;  }}@media (min-width:1200px){  #footer-wrapper.container{    width:1170px;padding-left:0;padding-right:0;  }  .panels-flexible-region-site_footer-center{    margin-left:42px;  }}.panels-flexible-region.panels-flexible-region-site_footer-left.panels-flexible-region-first {  float:left;}.panels-flexible-region-site_footer-center{  float:left;}#mini-panel-footer_mini_panel .panels-flexible-region-site_footer-center {  background-color: transparent;  padding: 0px;  padding-left: 77px;  margin-bottom: 21px;}#mini-panel-footer_mini_panel .identity {  background: url("http://web.temple.edu/sites/web.temple.edu/themes/web_communication_theme/images/web-communications-footer-icon-location.png") no-repeat 0 5px;  padding-left: 28px;}#mini-panel-footer_mini_panel ul {  margin: auto;}#mini-panel-footer_mini_panel ul li {  list-style-type: none;  line-height: 2.5;  padding-left: 28px;}#mini-panel-footer_mini_panel ul li.directory {  background: url("http://web.temple.edu/sites/web.temple.edu/themes/web_communication_theme/images/web-communications-footer-icon-directory.png") no-repeat 0 8px;}#mini-panel-footer_mini_panel ul li.maps {  background: url("http://web.temple.edu/sites/web.temple.edu/themes/web_communication_theme/images/web-communications-footer-icon-maps.png") no-repeat 0 8px;}#mini-panel-footer_mini_panel ul li.numbers {  background: url("http://web.temple.edu/sites/web.temple.edu/themes/web_communication_theme/images/web-communications-footer-icon-contact.png") no-repeat 0 8px;}#footer-top {  height: 21px;  background-color: #303030;  width: 100%;  clear: both;  margin-bottom: 14px;}#footer-wrapper {  position: relative;  bottom: 0;  width: 100%;}#sys-status {  padding: 4px 0 4px 56px;  width: 100%;  background-color: #303030;  color: #aaaaaa;}#sys-status a {  color: #eeeeee;}#social-media {  padding-right: 35px;  text-align: right;}#social-media img {  display: inline-block;  height: 36px;  width: 36px;  border: 0px;  vertical-align: bottom;  margin-right: 35px;}.pane-search-form {  width: 100%;  float: right;  padding: 28px;}.pane-search-form h2.pane-title {  display: inline;}.pane-search-form .pane-content {  display: inline;}.pane-search-form .pane-content form {  display: inline;}.pane-search-form .pane-content form div {  display: inline;}.pane-search-form {  width: 100%;  padding: 14px 0;  text-align: left;}#search-block-form input {  margin: 0 5px;  display: inline;}#search-block-form .field-prefix {  color: #494949;  font-size: 12px;  font-weight: bold;}#block-search-form {  overflow: hidden;  *zoom: 1;  width: 295px;}.pane-block-48 {  width: 100%;}#homebox-link {  float: right;  margin: -22px 42px 0 0;  z-index: 10000;  position: relative;}</style>
+		<!-- END: CUSTOM HEAD SYSTEM JS/CSS -->
+		<!-- BEGIN: CUSTOM HEAD GUIDE JS/CSS -->
+		
+		<!-- END: CUSTOM HEAD GUIDE JS/CSS -->
+		<script src="//guides.temple.edu/sa2.php?site_id=17&tsh=libguides-proc.springyaws.com&cms=1"></script>
+		<script>
+			springSpace.Common = springSpace.Common || { };
+
+			springSpace.Common.constant = {
+					PROCESSING: {
+						ACTION_DISPLAY_POLL: 159
+					}
+			};
+			springSpace.Common.baseURL = "http://guides.temple.edu/";
+			/*
+			springSpace.guidePublicObj = new springSpace.guidePublic.GuidePublic({
+				script_name: "/c.php",
+				guide_id: 120253,
+				page_id: 784193,
+				constant: {
+					PROCESSING: {
+
+					},
+					CONTENT: {
+						CONTENT_BOOKS: 5
+					}
+				}
+			});
+			*/
+			// Hide guide attributes and subjects/tags if theyre empty.
+			jQuery(function () {
+				//jQuery("#s-lg-guide-header-subjects").hide();
+				//jQuery("#s-lg-guide-header-tags").hide();
+			});
+
+			handleScroll=function() {
+				var target_elt = "";
+				var anchor = window.location.hash.substring(1);
+
+				if (jQuery.isNumeric(anchor)) {
+					xhr = jQuery.ajax({
+						async: false,
+						url: "/content_process.php",
+						type: "POST",
+						dataType: "json",
+						data: {
+							action: 562,
+							anchor: anchor
+						},
+						success: function(response, textStatus, jqXHR) {
+							if ((response.data.box_id != 0) && jQuery("#s-lg-box-" + response.data.box_id)) {
+								target_elt = "#s-lg-box-" + response.data.box_id;
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+
+						}
+					});
+				}
+				else if (false) {
+					target_elt = "#s-lg-page-section-784193";
+				}
+
+				if (target_elt != "") {
+					jQuery("html, body").animate({ scrollTop: jQuery(target_elt).offset().top }, 750);
+					if (jQuery(this).scrollTop() > 220) {
+						jQuery("#s-lib-scroll-top").fadeIn(750);
+					}
+				}
+			}
+	   </script>
+	   <script>
+			// Enable tooltips.
+			jQuery(function () {
+				try {
+					springSpace.UI.initPopOvers();
+				} catch (e) { }
+			});springSpace.springTrack.init({_st_site_id: '17',_st_guide_id: '120253',_st_page_id: '784193'});
+			jQuery(function() {springSpace.springTrack.trackPage({_st_type_id: '1',_st_guide_id: '120253',_st_page_id: '784193'});
+			});
+			jQuery(document).ready(function() {
+				handleScroll();
+			});
+	   </script>
+		        <!-- END: writeHead() -->
+        	</head>
+		<body class="s-lg-guide-body">
+		<a id="s-lg-public-skiplink" class="alert-info" href="#s-lg-guide-main">Skip to main content</a>                <!-- BEGIN: Page Header -->
+        <header class="header-search">
+
+	<div class="header-limiter">
+
+		<h1><a href="#"><span><img id="s-lib-banner-img" src="//s3.amazonaws.com/libapps/sites/17/groups/5675/banner/Libraries_2C_PMS201_white.png"></span></a></h1>
+<nav>
+			<a href="#"></a>
+</nav>
+	</div>
+
+</header>        <!-- END: Page Header -->
+        <!-- BEGIN: Guide Info Header -->
+        <div id="s-lg-guide-header" class="container s-lib-header s-lib-side-borders">
+            <div id="s-lib-bc">
+                
+			<ol id="s-lib-bc-list" class="breadcrumb">
+				
+					<li id="s-lib-bc-customer">
+						<a title="Libraries"  href="http://library.temple.edu">Libraries
+						</a>
+					</li>
+					<li id="s-lib-bc-site">
+						<a title="Research Guides"  href="//guides.temple.edu">Research Guides
+						</a>
+					</li>
+					<li id="s-lib-bc-guide">
+						<a title="Test Research Guides"  href="//guides.temple.edu/Test">Test Research Guides
+						</a>
+					</li>
+					<li id="s-lib-bc-page" class="active">Home
+					</li>
+			</ol>            </div>
+			<div class="pull-right">
+				<div id="s-lg-guide-header-search">
+					
+				<div id="s-lg-guide-search-box">
+					<form role="search" id="s-lg-guide-search-form" action="//guides.temple.edu/srch.php" method="GET">
+						<div class="input-group input-group-sm">
+							<input type="text" id="s-lg-guide-search-terms" name="q" class="form-control" placeholder="Search this Guide">
+							<label class="sr-only" for="s-lg-guide-search-terms">Search this Guide</label><input type="hidden" name="guide_id" value="120253" />
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit">Search</button>
+							</span>
+						</div>
+					</form>
+				</div>				</div>
+							</div>
+            <div id="s-lg-guide-header-info">
+                <h1 id="s-lg-guide-name">Test Research Guidess: Home</h1>
+                <div id="s-lg-guide-desc-container">
+                    <span id="s-lg-guide-description">This guide provides a test fixture.</span>
+                </div>
+            </div>
+        </div>
+        <!-- END: Guide Info Header -->
+        <div id="s-lg-tabs-container" class="container s-lib-side-borders pad-top-med">
+            <div id="s-lg-guide-tabs" class="tabs" role="navigation" aria-label="Guide Page Menu">
+                <ul class="nav nav-tabs split-button-nav" role="menu">
+                    
+				<li role="menuitem"  class="active">
+					<a
+						title=""
+						class="active"
+						href="/home" 
+                        aria-label="Navigate to the page: Home"
+					>
+						<span>Home</span>
+                        
+					</a>
+				</li>
+				<li role="menuitem" >
+					<a
+						title="What is SketchUp? Why should you use it?"
+						class=""
+						href="/c.php?g=120253&p=784416" 
+                        aria-label="Navigate to the page: Item One"
+					>
+						<span>Menu Item One</span>
+                        
+					</a>
+				</li>                </ul>
+            </div>
+        </div>
+        <div id="s-lg-guide-tabs-title-bar" class="container s-lib-side-borders"></div>
+        <!-- BEGIN: Guide Content -->
+        <div id="s-lg-guide-main" class="container s-lib-main s-lib-side-borders">
+            			
+				<div class="row s-lg-row">
+    <div id="s-lg-col-126" class="col-md-12">
+        <div class="s-lg-col-boxes">
+        </div>
+    </div>
+				
+</div>
+				<div class="row s-lg-row">
+    <div id="s-lg-col-1" class="col-md-3">
+        <div class="s-lg-col-boxes">
+							<div id="s-lg-box-wrapper-2733561" class="s-lg-box-wrapper-2733561">
+					<div id="s-lg-box-2332272-container" class="s-lib-box-container">
+						<div id="s-lg-box-2332272" class="s-lib-box s-lib-box-std">
+							<h2 class="s-lib-box-title">Subject Guide
+                                </h2>
+							<div id="s-lg-box-collapse-2332272" >
+								<div class="s-lib-box-content">
+									
+			<div id="s-lib-profile-13045" class="s-lib-profile-container">
+				<div id="s-lib-profile-image-13045" class="s-lib-profile-div s-lib-profile-center s-lib-profile-image"><a href="//guides.temple.edu/prf.php?account_id=16295">						
+					<img src="//s3.amazonaws.com/libapps/apps/common/images/profile.jpg" alt="Frodo Baggins" /></a>
+				</div>
+				<div id="s-lib-profile-name-13045" class="s-lib-profile-div s-lib-profile-center s-lib-profile-name">Frodo Baggins
+				</div>
+				<div id="s-lib-profile-email-13045" class="s-lib-profile-div s-lib-profile-center s-lib-profile-email"><a title="frodo.baggins@temple.edu" href="mailto:frodo.baggins@temple.edu" class="label label-info" style="font-size:1.6em;">Email Me</a>
+				</div>
+				<div id="s-lib-profile-widget-la-13045" class="s-lib-profile-div s-lib-profile-widget-la">
+					<div class="s-lib-profile-widget">
+					</div>
+				</div>
+				<div id="s-lib-profile-widget-lc-13045" class="s-lib-profile-div s-lib-profile-widget-lc">
+					<div class="s-lib-profile-widget">
+					</div>
+				</div>
+				<div id="s-lib-profile-widget-other-13045" class="s-lib-profile-div s-lib-profile-widget-other">
+					<div class="s-lib-profile-widget">
+					</div>
+				</div>
+				<div id="s-lib-profile-contact-13045" class="s-lib-profile-div s-lib-profile-contact">
+				</div>
+				<div id="s-lib-profile-social-13045" class="s-lib-profile-div s-lib-profile-social"><strong>Social:</strong><a title="Twitter" href="@danielleabdon"><i class="fa fa-twitter fa-lg"><span class="sr-only">Twitter Page</span></i></a>
+				</div>
+				<div id="s-lib-profile-subjects-13045" class="s-lib-profile-div s-lib-profile-subjects">
+				</div>
+			</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+							</div>
+        </div>
+    </div>
+    <div id="s-lg-col-2" class="col-md-9">
+        <div class="s-lg-col-boxes">
+							<div id="s-lg-box-wrapper-2734781" class="s-lg-box-wrapper-2734781">
+					<div id="s-lg-box-2333219-container" class="s-lib-box-container">
+						<div id="s-lg-box-2333219" class="s-lib-box s-lib-box-std">
+							<h2 class="s-lib-box-title">Test Research Guide
+                                </h2>
+							<div id="s-lg-box-collapse-2333219" >
+								<div class="s-lib-box-content">
+									
+			<div id="s-lg-content-4211073" class="  clearfix">
+        <p>In the middle of the earth, in the land of Shire</a><br/>
+          Lives a brave little hobbit whom we all admire<br/>
+          With his long wooden pipe, fuzzy woolly toes<br/>
+        He lives in a hobbit-hole and everybody knows
+				  <a href="http://temple.summon.serialssolutions.com/search?s.q=Bilbo#!/search?ho=t&l=en&q=Bilbo">him</a>.</p>
+		   </div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+							</div>
+        </div>
+    </div>
+				
+</div>
+				<div class="row s-lg-row">
+    <div id="s-lg-col-127" class="col-md-12">
+        <div class="s-lg-col-boxes">
+        </div>
+    </div>
+				
+</div>            
+				<ul id="s-lg-page-prevnext" class="pager s-lib-hide">
+					<li class="previous">
+					
+					</li>
+					<li class="next">
+					<a href="/c.php?g=120253&p=784416"><strong>Next:</strong> SketchUp &gt;&gt;</a>
+					</li>
+				</ul>        </div>
+        <!-- END: Guide Content -->
+        <!-- BEGIN: Page Footer -->
+        <div id="s-lib-footer-public" class="s-lib-footer footer container  s-lib-side-borders">
+            <div id="s-lg-guide-header-meta" class="pad-top-sm pad-left-med clearfix">
+                <ul id="s-lg-guide-header-attributes" class="">
+                    <li id="s-lg-guide-header-updated" class="s-lg-h-separator">
+                        <span class="s-lg-guide-label">Last Updated:</span> <span class="s-lg-text-greyout">Dec 8, 2015 5:03 AM</span>                    </li>
+                    <li id="s-lg-guide-header-url" class="s-lg-h-separator">
+                        <span class="s-lg-guide-label">URL:</span> <span class="s-lg-text-greyout">http://guides.temple.edu/example</span>                    </li>
+                    <li id="s-lg-guide-print-url">
+                        <a href="javascript: window.print();"><i class="fa fa-print" title="Print Page"></i> Print Page</a>                    </li>
+                </ul>
+                <div id="s-lib-footer-login-link" class="pull-right pad-right-med">
+                    <a href="https://temple.libapps.com/libapps/login.php?site_id=17&target64=L2xpYmd1aWRlcy9hZG1pbl9jLnBocD9nPTEyMDI1MyZwPTc4NDE5Mw==">Login to LibApps</a>                </div>
+            </div>
+            <div class="pad-bottom-sm clearfix">
+                <div id="s-lib-footer-support-link" class="pull-right pad-right-med">
+                    <a href="mailto:jsipes@temple.edu">Report a problem.</a> 
+                </div>
+                <div id="s-lg-guide-header-subjects" class="pad-top-sm pad-left-med pad-right-med pull-left">
+                    
+                    <span class="s-lg-guide-label">Subjects: </span>
+                    <span class="s-lg-small bold"><a href="//guides.temple.edu/sb.php?subject_id=19751">Architecture</a>, <a href="//guides.temple.edu/sb.php?subject_id=19740">Art</a>, <a href="//guides.temple.edu/sb.php?subject_id=19714">History</a></span>
+                                    </div>
+                <div id="s-lg-guide-header-tags" class="pad-top-sm pad-left-med">
+                    
+                    <span class="s-lg-guide-label">Tags: </span>
+                    <span class="s-lg-small bold"><a href="//guides.temple.edu/srch.php?tag=reconstruction&default_lg=1">reconstruction</a>, <a href="//guides.temple.edu/srch.php?tag=SketchUp&default_lg=1">SketchUp</a>, <a href="//guides.temple.edu/srch.php?tag=visualization&default_lg=1">visualization</a></span>
+                                    </div>
+            </div>
+        </div>
+        <!-- END: Page Footer -->
+        
+			<div id="s-lib-scroll-top">
+				<a href="javascript:void(0);" onclick="jQuery('html, body').animate({scrollTop: 0}, 750);" title="Back to Top" aria-label="Back to Top"
+				aria-hidden="true">
+					<span class="fa-stack fa-lg">
+					  <i class="fa fa-square-o fa-stack-2x"></i>
+					  <i class="fa fa-angle-double-up fa-stack-1x" style="position:relative; bottom:2px;"></i>
+					</span>
+				</a>
+			</div>        <div id="s-lib-alert" title="">
+                            <div id="s-lib-alert-content"></div>
+                       </div>        
+                <!-- BEGIN: Custom Footer -->
+                
+<div id="footer-wrapper" class="container">
+
+          <div id="footer" class="clearfix">
+          <div class="region region-footer">
+    <div id="block-block-101" class="block block-block">
+
+    
+  <div class="content">
+    <div id="footer-top"> </div>  </div>
+</div>
+<div id="block-panels-mini-footer-mini-panel" class="block block-panels-mini">
+
+    
+  <div class="content">
+    <div class="panel-flexible panels-flexible-site_footer clearfix" id="mini-panel-footer_mini_panel">
+<div class="panel-flexible-inside panels-flexible-site_footer-inside">
+<div class="panels-flexible-row panels-flexible-row-site_footer-main-row panels-flexible-row-first clearfix">
+  <div class="inside panels-flexible-row-inside panels-flexible-row-site_footer-main-row-inside panels-flexible-row-inside-first clearfix">
+<div class="panels-flexible-region panels-flexible-region-site_footer-left panels-flexible-region-first ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-site_footer-left-inside panels-flexible-region-inside-first">
+<div class="panel-pane pane-block pane-block-100">
+  
+      
+  
+  <div class="pane-content">
+    <div class="identity"><h2><a href="http://library.temple.edu/about/locations">Temple University</a></h2><h3><a href="http://library.temple.edu/about/locations">University Libraries</a></h3><p class="droid" style="font-size:80%;"><a href="http://library.temple.edu/about/locations">See all library locations</a></p></div><p> </p>  </div>
+
+  
+  </div>
+  </div>
+</div>
+<div class="panels-flexible-region panels-flexible-region-site_footer-center">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-site_footer-center-inside">
+<div class="panel-pane pane-block pane-block-98">
+  
+      
+  
+  <div class="pane-content">
+    <ul><li class="directory"><a href="http://library.temple.edu/about/staff">Library Directory</a></li><li class="maps"><a href="http://library.temple.edu/about/locations">Locations and Directions</a></li><li class="numbers"><a href="http://library.temple.edu/help/numbers">Frequently Called Numbers</a></li></ul>  </div>
+
+  
+  </div>
+  </div>
+</div>
+<div class="panels-flexible-region panels-flexible-region-site_footer-right panels-flexible-region-last ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-site_footer-right-inside panels-flexible-region-inside-last">
+<div class="panel-pane pane-block pane-block-97">
+  
+      
+  
+  <div class="pane-content">
+    <p id="social-media"><a href="http://library.temple.edu/connect"><img alt="Twitter Icon" src="http://library.temple.edu/sites/default/files/social-icons/twitter.png"><img alt="Facebook Icon" src="http://library.temple.edu/sites/default/files/social-icons/fb.png"><img alt="Tumblr Icon" src="http://library.temple.edu/sites/default/files/social-icons/tumblr.png"></a></p>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div>
+
+  
+  </div>
+  </div>
+</div>
+  </div>
+</div>
+<div class="panels-flexible-row panels-flexible-row-site_footer-1 panels-flexible-row-last clearfix ">
+  <div class="inside panels-flexible-row-inside panels-flexible-row-site_footer-1-inside panels-flexible-row-inside-last clearfix">
+<div class="panels-flexible-region panels-flexible-region-site_footer-bottom panels-flexible-region-first panels-flexible-region-last ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-site_footer-bottom-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+<div class="panel-pane pane-block pane-block-99">
+  
+      
+  
+  <div class="pane-content">
+    <p id="sys-status"><span>maintained by: </span><a href="http://library.temple.edu/contact" rel="nofollow">diglib@temple.edu</a></p>  </div>
+
+  
+  </div>
+  </div>
+</div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</div>
+  </div>
+       
+      </div> <!-- /#footer -->
+		<!-- END: Custom Footer -->
+<!-- BEGIN: Analytics code --><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-2152985-3");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script><!-- END: Analytics code -->	</body>
+	</html>
+	

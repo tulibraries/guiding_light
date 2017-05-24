@@ -28,10 +28,26 @@ module HarvestLibguides
     solr_doc["subject_topic_facet"] = meta["DC.Subject"].split(',').map { |i| i.strip } if meta.key?("DC.Subject")
     solr_doc["subject_t"] = meta["DC.Subject"].split(',').map { |i| i.strip } if meta.key?("DC.Subject")
     solr_doc["language_facet"] = meta["DC.Language"] if meta.key?("DC.Language")
+    solr_doc["link_facet"] = []
+    external_link_patterns.each do |type,shortname, pattern|
+      link_count =  AnalyzeLibguides.link_count(pattern, libguide_doc)
+      solr_doc["link_facet"] << "Has #{type} links" if  link_count > 0
+      solr_doc["#{shortname}_links_count_i"] = link_count
+    end
     solr_doc["url_fulltext_display"] = libguide_uri
     solr_doc["text"] = libguide_body
     solr_doc
   end
+
+  def self.external_link_patterns
+    [
+      ["Summon", 'summon', /temple.summon.serialssolutions.com/],
+      ["Diamond Permanent", 'diamond', /diamond.temple.edu\/record=/],
+      ["Diamond Non-Permanent", 'diamond_other', /diamond.temple.edu\/(?!record=)/],
+      ["Journal Finder", 'journal_finder', /vv4kg5gr5v.search.serialssolutions.com/]
+    ]
+  end
+
 
   def self.import(libguide_uri,
                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
@@ -91,7 +107,7 @@ module HarvestLibguides
     pages = []
     libguides_sites = Libguides.get_guides(config['api_url'], config['site_id'], config['api_key'])
     progressbar = ProgressBar.create(:title => "Harvest ", :total => libguides_sites.count, format: "%t (%c/%C) %a |%B|")
-    libguides_sites.each do |lg|
+    libguides_sites.each_with_index do |lg, i|
       begin
         pages += Libguides.get_pages(config['api_url'], config['site_id'], lg['id'], config['api_key'])
       rescue Exception => e
@@ -99,7 +115,6 @@ module HarvestLibguides
       end
       progressbar.increment
     end
-    puts
     #
     # Ingest guides
     #
@@ -122,5 +137,6 @@ module HarvestLibguides
     solr.commit
     batch_thread.each { |t| t.join }
   end
+  puts
 
 end
