@@ -123,5 +123,6 @@ module HarvestLibguides
     solr.commit
     batch_thread.each { |t| t.join }
   end
+  puts
 
 end
