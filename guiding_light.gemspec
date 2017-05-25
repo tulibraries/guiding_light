@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rack-utf8_sanitizer'
   s.add_runtime_dependency 'nokogiri'
   s.add_runtime_dependency 'thor'
-  s.add_runtime_dependency 'moneta', '~> 1.0.0'
+  s.add_runtime_dependency 'moneta', '~> 1.0'
 
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'solr_wrapper'
