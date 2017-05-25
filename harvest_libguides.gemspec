@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = HarvestLibguides::VERSION
   s.executables << 'lg2solr'
   s.authors = ["Steven Ng"]
-  s.date = %q{2017-05-23}
+  s.date = %q{2017-05-25}
   s.description = "Guiding Light - Ingests LibGuides site into Solr"
   s.summary = "Import LibGuides into Solr"
   s.email = "steven.ng@temple.edu"

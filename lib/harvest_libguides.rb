@@ -20,6 +20,7 @@ module HarvestLibguides
     solr_doc = Hash.new
     solr_doc["id"] = doc_id
     solr_doc["title_display"] = meta["DC.Title"] if meta.key?("DC.Title")
+    solr_doc["title_t"] = meta["DC.Title"] if meta.key?("DC.Title")
     solr_doc["author_display"] = meta["DC.Creator"] if meta.key?("DC.Creator")
     solr_doc["author_facet"] = meta["DC.Creator"] if meta.key?("DC.Creator")
     solr_doc["author_t"] = meta["DC.Creator"] if meta.key?("DC.Creator")
