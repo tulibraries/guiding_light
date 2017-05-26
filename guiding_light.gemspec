@@ -25,9 +25,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'nokogiri'
   s.add_runtime_dependency 'thor'
 
-	s.add_development_dependency 'rspec'
-	s.add_development_dependency 'solr_wrapper'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'solr_wrapper'
   s.add_development_dependency 'byebug'
-	s.add_development_dependency 'webmock'
-	s.add_development_dependency 'pry'
+  s.add_development_dependency 'webmock'
+  s.add_development_dependency 'pry'
 end
