@@ -37,7 +37,13 @@ bundle exec lg2solr harvest http://guides.temple.edu/sitemap.xml
 
 ### Harvest complete all LibGuides with solr_uri in config file
 
-Use the `config/libguides.yml` to specify the API URL, API key, Solr URI, and ingest batch size and execute the `harvest_all` command to ingest all libguides.
+While in development and test, in order to save bandwith and the number of hits to the external LibGuides service, the libguides library caches HTTP calls. Cached files are created on the initial execution and stored in the `cache` directory. Harvesting and Ingest must must run with RAILS_ENV must be either be set to development or test.
+
+```sh
+RAILS_ENV=development bundle exec lg2solr harvest_all
+```
+
+To clean the cache, delete the contents of the cache files:
 
 ```sh
 bundle exec lg2solr harvest_all
