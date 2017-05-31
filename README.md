@@ -3,27 +3,7 @@
 
 ## Getting Started
 
-## Hacking on the gem
-
-
-`git clone https://github.com/tulibraries/guiding_light`
-
-`cd guiding_light`
-
-`bundle install`
-
-:hammer: :computer: :nut_and_bolt: :computer: :hammer:
-
-
-
-## Running the tests
-
-`rspec`
-
-
-Rake file to ingest LibGuides file data into Solr. Presumes the LibGuides file has unique headers
-
-## Ingest LibGuides file into Solr
+### Ingest LibGuides file into Solr
 
 1. Customize the Solr schema. For Blacklight applications, this file will be `solr/conf/schema.xml`.
 
@@ -33,16 +13,67 @@ Rake file to ingest LibGuides file data into Solr. Presumes the LibGuides file h
 
 2. Customize the Solr configuration. For Blacklight applications, this file will be `solr/conf/solrconfig.xml`.
 
-## Harvest an individual site
+### Install Guiding Light
+
+Guiding light installs as a Ruby Gem:
+
+`gem install guiding_light`
+
+Or add it to your Gemfile:
+
+`gem 'guiding_light'`
+
+### Harvest an individual site
 
 ```sh
-ruby bin/libguides2solr.rb import URL_OF_SITE
+bundle exec lg2solr import URL_OF_SITE
 ```
 
-## Harvest complete LibGuide installation given a site map URL
+### Harvest complete LibGuide installation given a site map URL
 
 ```sh
-ruby bin/libguides2solr.rb harvest http://guides.temple.edu/sitemap.xml
+bundle exec lg2solr harvest http://guides.temple.edu/sitemap.xml
 ```
 
+### Harvest complete all LibGuides with solr_uri in config file
+
+While in development and test, in order to save bandwith and the number of hits to the external LibGuides service, the libguides library caches HTTP calls. Cached files are created on the initial execution and stored in the `cache` directory. Harvesting and Ingest must must run with RAILS_ENV must be either be set to development or test.
+
+```sh
+RAILS_ENV=development bundle exec lg2solr harvest_all
+```
+
+To clean the cache, delete the contents of the cache files:
+
+```sh
+bundle exec lg2solr harvest_all
+```
+
+### LibGuides API Caching
+
+While in development and test, in order to save bandwith and the number of hits to the external LibGuides service, the libguides library caches HTTP calls. Cached files are created on the initial execution and stored in the `cache` directory. Harvesting and Ingest must must run with RAILS_ENV must be either be set to development or test.
+
+```sh
+RAILS_ENV=development bundle exec lg2solr harvest_all
+```
+
+To clean the cache, delete the contents of the cache files:
+
+```sh
+rm -rf cache/*.yml cache/docs/*
+```
+
+## Hacking on the gem
+
+`git clone https://github.com/tulibraries/guiding_light`
+
+`cd guiding_light`
+
+`bundle install`
+
+`RUBYLIB=lib RAILS_ENV=development bin/lg2solr harvest_all`
+
+## Running the tests
+
+`rspec`
 

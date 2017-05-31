@@ -1,2 +1,5 @@
 Gemfile.lock
+cache/
+log/
+config/libguides.yml
 *.gem

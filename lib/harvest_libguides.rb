@@ -12,7 +12,7 @@ require 'libguides'
 module HarvestLibguides
   def self.doc_to_solr(libguide_uri, doc_id = libguide_uri)
     # Extract metadata and content
-    libguide_doc = Nokogiri::HTML(open(libguide_uri))
+    libguide_doc = Nokogiri::HTML(Libguides.get_doc(libguide_uri, :File, "cache/docs"))
     libguide_body = libguide_doc.css("#s-lg-guide-main").inner_text.gsub(/\t/, '').gsub(/\n/, '').gsub(/\r/,'').gsub(/\W+/, ' ')
     meta = libguide_doc.css("meta").map { |val| [val["name"], val["content"]] if val.key?("name") }.compact.to_h
 
@@ -108,7 +108,7 @@ module HarvestLibguides
     pages = []
     libguides_sites = Libguides.get_guides(config['api_url'], config['site_id'], config['api_key'])
     progressbar = ProgressBar.create(:title => "Harvest ", :total => libguides_sites.count, format: "%t (%c/%C) %a |%B|")
-    libguides_sites.each_with_index do |lg, i|
+    libguides_sites.each do |lg|
       begin
         pages += Libguides.get_pages(config['api_url'], config['site_id'], lg['id'], config['api_key'])
       rescue Exception => e
