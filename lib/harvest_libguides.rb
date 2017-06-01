@@ -99,7 +99,7 @@ module HarvestLibguides
   end
 
   def self.harvest_all
-    config = YAML.load_file(File.expand_path "config/libguides.yml")
+    config = GuidingLight.configuration
     log = Logger.new("log/harvest_libguides.log")
     #
     # Harvest guides
