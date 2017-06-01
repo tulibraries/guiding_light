@@ -8,36 +8,28 @@ require 'ruby-progressbar'
 require 'logger'
 require 'yaml'
 require 'libguides'
+require 'analyze_libguides'
+require 'pry'
 
 module HarvestLibguides
+
   def self.doc_to_solr(libguide_uri, doc_id = libguide_uri)
     # Extract metadata and content
-    libguide_doc = Nokogiri::HTML(Libguides.get_doc(libguide_uri, :File, "cache/docs"))
+    libguide_doc = Nokogiri::HTML(Libguides.get_doc(libguide_uri, "cache/docs"))
     libguide_body = libguide_doc.css("#s-lg-guide-main").inner_text.gsub(/\t/, '').gsub(/\n/, '').gsub(/\r/,'').gsub(/\W+/, ' ')
     meta = libguide_doc.css("meta").map { |val| [val["name"], val["content"]] if val.key?("name") }.compact.to_h
 
-    # Assemble solr doc
-    solr_doc = Hash.new
-    solr_doc["id"] = doc_id
-    solr_doc["title_display"] = meta["DC.Title"] if meta.key?("DC.Title")
-    solr_doc["title_t"] = meta["DC.Title"] if meta.key?("DC.Title")
-    solr_doc["author_display"] = meta["DC.Creator"] if meta.key?("DC.Creator")
-    solr_doc["author_facet"] = meta["DC.Creator"] if meta.key?("DC.Creator")
-    solr_doc["author_t"] = meta["DC.Creator"] if meta.key?("DC.Creator")
-    solr_doc["description_display"] = meta["DC.Description"] if meta.key?("DC.Description")
-    solr_doc["description_t"] = meta["DC.Description"] if meta.key?("DC.Description")
-    solr_doc["subject_topic_facet"] = meta["DC.Subject"].split(',').map { |i| i.strip } if meta.key?("DC.Subject")
-    solr_doc["subject_t"] = meta["DC.Subject"].split(',').map { |i| i.strip } if meta.key?("DC.Subject")
-    solr_doc["language_facet"] = meta["DC.Language"] if meta.key?("DC.Language")
+    libguide = LibguideDoc.new(libguide_uri, doc_id, meta)
+    solr_doc = libguide.to_solr
+
     solr_doc["link_facet"] = []
-    external_link_patterns.each do |type,shortname, pattern|
+    external_link_patterns.each do |type, shortname, pattern|
       link_count =  AnalyzeLibguides.link_count(pattern, libguide_doc)
       solr_doc["link_facet"] << "Has #{type} links" if  link_count > 0
       solr_doc["#{shortname}_links_count_i"] = link_count
     end
-    solr_doc["url_fulltext_display"] = libguide_uri
-    solr_doc["text"] = libguide_body
     solr_doc
+
   end
 
   def self.external_link_patterns
@@ -59,7 +51,7 @@ module HarvestLibguides
   end
 
   def self.harvest(libguides_sitemap,
-                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
+              solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
     sites_doc = Nokogiri::XML(open(libguides_sitemap))
     libguides_sites = sites_doc.xpath('//xmlns:loc').map { |url| url.text }
     batch_size = 10
@@ -80,21 +72,7 @@ module HarvestLibguides
 
       solr.commit
 
-      puts "Awaiting completion"
       batch_thread.each { |t| t.join }
-      puts "Done"
-    end
-  end
-
-  def self.harvest_single(libguides_sitemap,
-                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
-    sites_doc = Nokogiri::XML(open(libguides_sitemap))
-    libguides_sites = sites_doc.xpath('//xmlns:loc').map { |url| url.text }
-
-    progressbar = ProgressBar.create(:title => "Harvest ", :total => 1 + (libguides_sites.count), format: "%t (%c/%C) %a |%B|")
-    libguides_sites.each do |site|
-      import(site, solr_endpoint)
-      progressbar.increment
     end
   end
 
@@ -110,7 +88,7 @@ module HarvestLibguides
     progressbar = ProgressBar.create(:title => "Harvest ", :total => libguides_sites.count, format: "%t (%c/%C) %a |%B|")
     libguides_sites.each do |lg|
       begin
-        pages += Libguides.get_pages(config['api_url'], config['site_id'], lg['id'], config['api_key'])
+        pages += Libguides.get_pages(config['api_url'], config['site_id'], lg['id'], config['api_key']) unless lg['owner_id']=="15111"
       rescue Exception => e
         log.error "Ingest site failed: #{e.message}"
       end
@@ -129,6 +107,10 @@ module HarvestLibguides
           page_batch << doc_to_solr(p['url'], p['id'])
         rescue Exception => e
           log.error "Ingest page failed: #{e.message}"
+          log.error "#{e.to_s}"
+          e.backtrace.each do |bt|
+            log.error "#{bt}"
+          end
         end
         progressbar.increment
       end
@@ -139,5 +121,47 @@ module HarvestLibguides
     batch_thread.each { |t| t.join }
   end
   puts
+
+end
+
+class SolrDoc
+end
+
+class LibguideDoc < SolrDoc
+  attr_reader :doc, :libguide_uri, :doc_id, :title, :author, :description, :subjects, :language, :url, :text, :links
+
+  def initialize(libguide_uri, doc_id, meta = {})
+    @libguide_uri = libguide_uri
+    @id = doc_id.to_s
+    @title = meta["DC.Title"]
+    @author = meta["DC.Creator"]
+    @description = meta["DC.Description"]
+    @subject = meta["DC.Subject"].split(',').map { |i| i.strip } if meta.key?("DC.Subject")
+    @language = meta["DC.Language"]
+    @url = meta["url"]
+    @text = meta["text"]
+  end
+
+  def to_solr
+
+    link_hash = []
+    doc = {    
+      "id" => @id,
+      "title_display" => @title,
+      "title_t" => @title,
+      "author_display" => @author,
+      "author_facet" => @author,
+      "author_t" => @author,
+      "description_display" => @description,
+      "description_t" => @description,
+      "subject_topic_facet" => @subject,
+      "subject_t" => @subject,
+      "language_facet" => @language,
+      "url_fulltext_display" => @libguide_uri,
+      "text" => @text,
+    }
+    
+    doc
+  end
 
 end
