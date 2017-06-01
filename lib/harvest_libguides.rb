@@ -7,7 +7,6 @@ require 'ruby-progressbar'
 require 'logger'
 require 'yaml'
 require 'libguides'
-require 'analyze_libguides'
 
 module HarvestLibguides
 
@@ -141,12 +140,14 @@ class LibguideDoc < SolrDoc
   def add_fields(solr_doc, libguide_doc)
     solr_doc["link_facet"] = []
     external_link_patterns.each do |type, shortname, pattern|
-      link_count =  AnalyzeLibguides.link_count(pattern, libguide_doc)
+      link_count =  link_count(pattern, libguide_doc)
       solr_doc["link_facet"] << "Has #{type} links" if  link_count > 0
       solr_doc["#{shortname}_links_count_i"] = link_count
     end
     solr_doc
   end
+
+  private
 
   def external_link_patterns
     [
@@ -155,5 +156,9 @@ class LibguideDoc < SolrDoc
       ["Diamond Non-Permanent", 'diamond_other', /diamond.temple.edu\/(?!record=)/],
       ["Journal Finder", 'journal_finder', /vv4kg5gr5v.search.serialssolutions.com/]
     ]
+  end
+
+  def link_count(pattern, libguide_doc)
+    libguide_doc.xpath("//a").map { |a| a["href"] }.select { |link| link =~ pattern }.count
   end
 end
