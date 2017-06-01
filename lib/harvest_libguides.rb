@@ -2,14 +2,12 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'rsolr'
-require 'byebug'
 require 'securerandom'
 require 'ruby-progressbar'
 require 'logger'
 require 'yaml'
 require 'libguides'
 require 'analyze_libguides'
-require 'pry'
 
 module HarvestLibguides
 
@@ -21,26 +19,8 @@ module HarvestLibguides
 
     libguide = LibguideDoc.new(libguide_uri, doc_id, meta)
     solr_doc = libguide.to_solr
-
-    solr_doc["link_facet"] = []
-    external_link_patterns.each do |type, shortname, pattern|
-      link_count =  AnalyzeLibguides.link_count(pattern, libguide_doc)
-      solr_doc["link_facet"] << "Has #{type} links" if  link_count > 0
-      solr_doc["#{shortname}_links_count_i"] = link_count
-    end
-    solr_doc
-
+    solr_doc = libguide.add_fields(solr_doc, libguide_doc)
   end
-
-  def self.external_link_patterns
-    [
-      ["Summon", 'summon', /temple.summon.serialssolutions.com/],
-      ["Diamond Permanent", 'diamond', /diamond.temple.edu\/record=/],
-      ["Diamond Non-Permanent", 'diamond_other', /diamond.temple.edu\/(?!record=)/],
-      ["Journal Finder", 'journal_finder', /vv4kg5gr5v.search.serialssolutions.com/]
-    ]
-  end
-
 
   def self.import(libguide_uri,
                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
@@ -79,6 +59,7 @@ module HarvestLibguides
   def self.harvest_all
     config = YAML.load_file(File.expand_path "config/libguides.yml")
     log = Logger.new("log/harvest_libguides.log")
+    skip_list = Moneta.new(:YAML, file: 'config/skip.yml')
     #
     # Harvest guides
     #
@@ -88,9 +69,10 @@ module HarvestLibguides
     progressbar = ProgressBar.create(:title => "Harvest ", :total => libguides_sites.count, format: "%t (%c/%C) %a |%B|")
     libguides_sites.each do |lg|
       begin
-        pages += Libguides.get_pages(config['api_url'], config['site_id'], lg['id'], config['api_key']) unless lg['owner_id']=="15111"
+        pages += Libguides.get_pages(config['api_url'], config['site_id'], lg['id'], config['api_key']) unless skip_list["libguide:#{lg['id']}"]
       rescue Exception => e
         log.error "Ingest site failed: #{e.message}"
+        skip_list["libguide:#{lg['id']}"] = e.message
       end
       progressbar.increment
     end
@@ -104,13 +86,10 @@ module HarvestLibguides
       page_batch = []
       batch.each do |p|
         begin
-          page_batch << doc_to_solr(p['url'], p['id'])
+          page_batch << doc_to_solr(p['url'], p['id']) unless skip_list["#{p['url']}"]
         rescue Exception => e
           log.error "Ingest page failed: #{e.message}"
-          log.error "#{e.to_s}"
-          e.backtrace.each do |bt|
-            log.error "#{bt}"
-          end
+          skip_list["#{p['url']}"] = e.message
         end
         progressbar.increment
       end
@@ -125,9 +104,6 @@ module HarvestLibguides
 end
 
 class SolrDoc
-end
-
-class LibguideDoc < SolrDoc
   attr_reader :doc, :libguide_uri, :doc_id, :title, :author, :description, :subjects, :language, :url, :text, :links
 
   def initialize(libguide_uri, doc_id, meta = {})
@@ -143,8 +119,6 @@ class LibguideDoc < SolrDoc
   end
 
   def to_solr
-
-    link_hash = []
     doc = {    
       "id" => @id,
       "title_display" => @title,
@@ -160,8 +134,26 @@ class LibguideDoc < SolrDoc
       "url_fulltext_display" => @libguide_uri,
       "text" => @text,
     }
-    
-    doc
+  end
+end
+
+class LibguideDoc < SolrDoc
+  def add_fields(solr_doc, libguide_doc)
+    solr_doc["link_facet"] = []
+    external_link_patterns.each do |type, shortname, pattern|
+      link_count =  AnalyzeLibguides.link_count(pattern, libguide_doc)
+      solr_doc["link_facet"] << "Has #{type} links" if  link_count > 0
+      solr_doc["#{shortname}_links_count_i"] = link_count
+    end
+    solr_doc
   end
 
+  def external_link_patterns
+    [
+      ["Summon", 'summon', /temple.summon.serialssolutions.com/],
+      ["Diamond Permanent", 'diamond', /diamond.temple.edu\/record=/],
+      ["Diamond Non-Permanent", 'diamond_other', /diamond.temple.edu\/(?!record=)/],
+      ["Journal Finder", 'journal_finder', /vv4kg5gr5v.search.serialssolutions.com/]
+    ]
+  end
 end
