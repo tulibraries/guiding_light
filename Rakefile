@@ -1,12 +1,8 @@
 require 'harvest_libguides'
 
-namespace :blimp do
-  namespace :libguides do
-    desc "Ingest a sitemap"
-    task :ingest, [:source] do |t, args|
-      Rake::FileList.new("*.csv") do |fl|
-        fl.each { |f| HarvestLibGuides.harvest(f) }
-      end
-    end
+namespace :guidinglight do
+  desc 'harvests all libguides associated with API URL in `config/libguides.yaml`'
+  task :harvest_all do
+    Libguides::Harvest.harvest_all
   end
 end
