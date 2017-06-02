@@ -21,9 +21,13 @@ module Libguides
     end
   end
 
+  def self.page_url(api_url, site_id, guide_id, api_key)
+    "#{api_url}#{guide_id}?site_id=#{site_id}?&key=#{api_key}&expand=pages"
+  end
+
   def self.get_pages(api_url, site_id, guide_id, api_key)
     # Extract metadata and content
-    url = "#{api_url}#{guide_id}?site_id=#{site_id}?&key=#{api_key}&expand=pages"
+    url = page_url(api_url, site_id, guide_id, api_key)
     doc = Nokogiri::HTML(get_doc(url, "cache/pages"))
     doc_hash = JSON.parse(doc.css("p").children.first).first
     pages = doc_hash["pages"]
