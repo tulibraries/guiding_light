@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "thor"
-require "Harvest_Libguides"
+require "harvest_libguides"
 
 class Lg2Solr < Thor
   desc "import URL", "Import single LibGuides document at URL to running Solr endpoint"
