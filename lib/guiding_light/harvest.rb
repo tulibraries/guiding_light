@@ -7,12 +7,11 @@ require 'securerandom'
 require 'ruby-progressbar'
 require 'logger'
 require 'yaml'
-require 'libguides'
 
-module HarvestLibguides
+module GuidingLight::Harvest
   def self.doc_to_solr(libguide_uri, doc_id = libguide_uri)
     # Extract metadata and content
-    libguide_doc = Nokogiri::HTML(Libguides.get_doc(libguide_uri, :File, "cache/docs"))
+    libguide_doc = Nokogiri::HTML(GuidingLight::Request.get_doc(libguide_uri, :File, "cache/docs"))
     libguide_body = libguide_doc.css("#s-lg-guide-main").inner_text.gsub(/\t/, '').gsub(/\n/, '').gsub(/\r/,'').gsub(/\W+/, ' ')
     meta = libguide_doc.css("meta").map { |val| [val["name"], val["content"]] if val.key?("name") }.compact.to_h
 
@@ -31,7 +30,7 @@ module HarvestLibguides
     solr_doc["language_facet"] = meta["DC.Language"] if meta.key?("DC.Language")
     solr_doc["link_facet"] = []
     external_link_patterns.each do |type,shortname, pattern|
-      link_count =  AnalyzeLibguides.link_count(pattern, libguide_doc)
+      link_count =  GuidingLight::Analyze.link_count(pattern, libguide_doc)
       solr_doc["link_facet"] << "Has #{type} links" if  link_count > 0
       solr_doc["#{shortname}_links_count_i"] = link_count
     end
@@ -104,13 +103,13 @@ module HarvestLibguides
     #
     # Harvest guides
     #
-    solr = RSolr.connect url: config['solr_uri']
+    solr = RSolr.connect url: config.solr_url
     pages = []
-    libguides_sites = Libguides.get_guides(config['api_url'], config['site_id'], config['api_key'])
+    libguides_sites = GuidingLight::Request.get_guides(config.api_url, config.site_id, config.api_key)
     progressbar = ProgressBar.create(:title => "Harvest ", :total => libguides_sites.count, format: "%t (%c/%C) %a |%B|")
     libguides_sites.each do |lg|
       begin
-        pages += Libguides.get_pages(config['api_url'], config['site_id'], lg['id'], config['api_key'])
+        pages += GuidingLight::Request.get_pages(config.api_url, config.site_id, lg['id'], config.api_key)
       rescue Exception => e
         log.error "Ingest site failed: #{e.message}"
       end
@@ -121,7 +120,7 @@ module HarvestLibguides
     #
     progressbar = ProgressBar.create(:title => "Ingest", :total => pages.count, format: "%t (%c/%C) %a |%B|")
     batch_thread = []
-    pages.each_slice(config['solr_batch_size']) do |batch|
+    pages.each_slice(config.solr_batch_size) do |batch|
       batch_thread << Thread.new {
       page_batch = []
       batch.each do |p|

@@ -9,6 +9,7 @@ describe "LibGuides Module" do
   describe "LibGuide pages" do
     let (:guide_id) { 120253 }
     it "gets list of pages from the libguide url" do
+      allow(allow(OpenURI).to receive(:open).and_return(hdoc = StringIO.new)).to receive(:read) { "TEST" }
       pages = Libguides.get_pages(api_url, site_id, guide_id, api_key)
       expect(pages.any? { |p| p['name'] == "Home" }).to be
       expect(pages.any? { |p| p['name'] == "SketchUp" }).to be
@@ -19,6 +20,7 @@ describe "LibGuides Module" do
 
   describe "LibGuides list" do
     it "gets a list of all published libguides" do
+      allow(allow(OpenURI).to receive(:open).and_return(hdoc = StringIO.new)).to receive(:read) { "TEST" }
       libguides = Libguides.get_guides(api_url, site_id, api_key)
 
       expect(libguides.any? { |lg| lg['status'] == "1" }).to be

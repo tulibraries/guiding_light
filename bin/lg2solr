@@ -1,23 +1,27 @@
 #!/usr/bin/env ruby
 
+$LOAD_PATH.unshift(File.expand_path("../..", __FILE__))
+
 require "thor"
-require "harvest_libguides"
-require "analyze_libguides"
+require "guiding_light"
 
 class Lg2Solr < Thor
   desc "import URL", "Import single LibGuides document at URL to running Solr endpoint"
   def import(libguides_url)
-    HarvestLibguides.import(libguides_url)
+    GuidingLight.configure
+    GuidingLight::Harvest.import(libguides_url)
   end
 
   desc "harvest URL", "Harvests LibGuides documents from LibGuides installation running Solr endpoint"
   def harvest(libguides_site_map)
-    HarvestLibguides.harvest_single(libguides_site_map)
+    GuidingLight.configure
+    GuidingLight::Harvest.harvest_single(libguides_site_map)
   end
 
   desc "harvest_all", "Harvests LibGuides based on parameters in configuration file"
   def harvest_all
-    HarvestLibguides.harvest_all
+    GuidingLight.configure
+    GuidingLight::Harvest.harvest_all
   end
 end
 

@@ -6,7 +6,7 @@ require 'byebug'
 require 'moneta'
 require 'digest'
 
-module Libguides
+module GuidingLight::Request
 
   def self.use_caching?
     return ["development", "test"].include? ENV["RAILS_ENV"]
