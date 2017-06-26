@@ -2,7 +2,6 @@ require 'rubygems'
 require 'nokogiri'
 require 'json'
 require 'open-uri'
-require 'byebug'
 require 'moneta'
 require 'digest'
 
