@@ -29,23 +29,14 @@ module GuidingLight::Harvest
     solr_doc["subject_t"] = meta["DC.Subject"].split(',').map { |i| i.strip } if meta.key?("DC.Subject")
     solr_doc["language_facet"] = meta["DC.Language"] if meta.key?("DC.Language")
     solr_doc["link_facet"] = []
-    external_link_patterns.each do |type,shortname, pattern|
-      link_count =  GuidingLight::Analyze.link_count(pattern, libguide_doc)
-      solr_doc["link_facet"] << "Has #{type} links" if  link_count > 0
-      solr_doc["#{shortname}_links_count_i"] = link_count
-    end
+    solr_doc = application_fields(solr_doc, libguide_doc)
     solr_doc["url_fulltext_display"] = libguide_uri
     solr_doc["text"] = libguide_body
     solr_doc
   end
 
-  def self.external_link_patterns
-    [
-      ["Summon", 'summon', /temple.summon.serialssolutions.com/],
-      ["Diamond Permanent", 'diamond', /diamond.temple.edu\/record=/],
-      ["Diamond Non-Permanent", 'diamond_other', /diamond.temple.edu\/(?!record=)/],
-      ["Journal Finder", 'journal_finder', /vv4kg5gr5v.search.serialssolutions.com/]
-    ]
+  def self.application_fields(solr_doc, libguide_doc)
+    solr_doc
   end
 
 

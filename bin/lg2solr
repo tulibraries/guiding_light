@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
 $LOAD_PATH.unshift(File.expand_path("../..", __FILE__))
+$LOAD_PATH.unshift(File.expand_path("lib")) unless $LOAD_PATH.include?(File.expand_path("lib"))
 
 require "thor"
 require "guiding_light"
+require "guiding_light/application_fields" if File.exists? File.expand_path(File.join("lib", "guiding_light", "application_fields.rb"))
 
 class Lg2Solr < Thor
   desc "import URL", "Import single LibGuides document at URL to running Solr endpoint"
