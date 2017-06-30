@@ -24,7 +24,7 @@ module GuidingLight
       @api_url  = config.fetch 'api_url',  'http://lgapi-us.libapps.com/1.1/guides/'
       @site_id  = config.fetch 'site_id',  "42"
       @solr_url = config.fetch 'solr_url', "http://localhost:8983/solr/blacklight-core"
-      @solr_batch_size = config.fetch 'solr_batch_size', "100"
+      @solr_batch_size = config.fetch 'solr_batch_size', 100
     end
 
 
