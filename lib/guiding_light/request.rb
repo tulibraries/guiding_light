@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'nokogiri'
 require 'json'
 require 'open-uri'
 require 'moneta'
@@ -26,18 +25,9 @@ module GuidingLight::Request
     end
   end
 
-  def self.get_pages(api_url, site_id, guide_id, api_key)
-    # Extract metadata and content
-    url = "#{api_url}#{guide_id}?site_id=#{site_id}?&key=#{api_key}&expand=pages"
-    doc = Nokogiri::HTML(get_doc(url, :YAML, "cache/pages.yml"))
-    doc_hash = JSON.parse(doc.css("p").children.first).first
-    pages = doc_hash["pages"]
-  end
-
-  def self.get_guides(libguide_url, site_id, api_key)
-    url = "#{libguide_url}?site_id=#{site_id}&key=#{api_key}"
-    doc = Nokogiri::HTML(get_doc(url, :YAML, "cache/guides.yml"))
-    sites = JSON.parse(doc.css("p").entries.first)
+  def self.get_guides(api_url, site_id, api_key)
+    url = "#{api_url}?site_id=#{site_id}?&key=#{api_key}&expand=pages"
+    sites = JSON.parse(get_doc(url, :YAML, "cache/guides.yml"))
     published_sites = sites.select { |s| s['status'] == '1' }
   end
 end

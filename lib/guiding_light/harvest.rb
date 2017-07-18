@@ -96,15 +96,7 @@ module GuidingLight::Harvest
     solr = RSolr.connect url: config.solr_url
     pages = []
     libguides_sites = GuidingLight::Request.get_guides(config.api_url, config.site_id, config.api_key)
-    progressbar = ProgressBar.create(:title => "Harvest ", :total => libguides_sites.count, format: "%t (%c/%C) %a |%B|")
-    libguides_sites.each do |lg|
-      begin
-        pages += GuidingLight::Request.get_pages(config.api_url, config.site_id, lg['id'], config.api_key)
-      rescue Exception => e
-        log.error "Ingest site failed: #{e.message}"
-      end
-      progressbar.increment
-    end
+    pages = libguides_sites.map { |lg| lg['pages'] }.flatten
     #
     # Ingest guides
     #
