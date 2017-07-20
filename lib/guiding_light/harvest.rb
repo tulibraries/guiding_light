@@ -94,6 +94,7 @@ module GuidingLight::Harvest
     # Harvest guides
     #
     solr = RSolr.connect url: config.solr_url
+    puts "Using Solr url #{config.solr_url}"
     pages = []
     libguides_sites = GuidingLight::Request.get_guides(config.api_url, config.site_id, config.api_key)
     pages = libguides_sites.map { |lg| lg['pages'] }.flatten
