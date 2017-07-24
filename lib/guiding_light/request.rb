@@ -6,6 +6,10 @@ require 'digest'
 
 module GuidingLight::Request
 
+  GL_UNPUBLISHED = '0'
+  GL_PUBLISHED = '1'
+  GL_PRIVATE = '2'
+
   def self.use_caching?
     return ["development", "test"].include? ENV["RAILS_ENV"]
   end
@@ -28,6 +32,6 @@ module GuidingLight::Request
   def self.get_guides(api_url, site_id, api_key)
     url = "#{api_url}?site_id=#{site_id}?&key=#{api_key}&expand=pages"
     sites = JSON.parse(get_doc(url, :YAML, "cache/guides.yml"))
-    published_sites = sites.select { |s| s['status'] == '1' }
+    published_sites = sites.select { |s| s['status'] != GL_PRIVATE }
   end
 end

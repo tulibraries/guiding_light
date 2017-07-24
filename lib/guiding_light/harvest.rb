@@ -8,7 +8,7 @@ require 'logger'
 require 'yaml'
 
 module GuidingLight::Harvest
-  def self.doc_to_solr(libguide_uri, doc_id = libguide_uri)
+  def self.doc_to_solr(libguide_uri, doc_id = libguide_uri, doc_status = "published")
     # Extract metadata and content
     libguide_doc = Nokogiri::HTML(GuidingLight::Request.get_doc(libguide_uri, :File, "cache/docs"))
     libguide_body = libguide_doc.css("#s-lg-guide-main").inner_text.gsub(/\t/, '').gsub(/\n/, '').gsub(/\r/,'').gsub(/\W+/, ' ')
@@ -31,6 +31,7 @@ module GuidingLight::Harvest
     solr_doc = application_fields(solr_doc, libguide_doc)
     solr_doc["url_fulltext_display"] = libguide_uri
     solr_doc["text"] = libguide_body
+    solr_doc["status_t"] = solr_doc["status_facet"] = doc_status
     solr_doc
   end
 
@@ -97,7 +98,12 @@ module GuidingLight::Harvest
     puts "Using Solr url #{config.solr_url}"
     pages = []
     libguides_sites = GuidingLight::Request.get_guides(config.api_url, config.site_id, config.api_key)
-    pages = libguides_sites.map { |lg| lg['pages'] }.flatten
+    pages = libguides_sites.map { |lg|
+      lg['pages'].map { |p|
+        p['status'] = lg['status_label']
+        p
+      }
+    }.flatten
     #
     # Ingest guides
     #
@@ -108,7 +114,7 @@ module GuidingLight::Harvest
       page_batch = []
       batch.each do |p|
         begin
-          page_batch << doc_to_solr(p['url'], p['id'])
+          page_batch << doc_to_solr(p['url'], p['id'], p['status'])
         rescue Exception => e
           log.error "Ingest page failed: #{e.message}"
         end
