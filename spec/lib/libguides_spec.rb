@@ -6,7 +6,7 @@ describe "GuidingLights Module" do
   let (:api_url) { "http://lgapi-us.libapps.com/1.1/guides/" }
   let (:site_id) { 17 }
 
-  describe "GuidingLight pages" do
+  xdescribe "GuidingLight pages" do
     let (:guide_id) { 120253 }
     it "gets list of pages from the GuidingLight url" do
       allow(allow(OpenURI).to receive(:open).and_return(hdoc = StringIO.new)).to receive(:read) { "TEST" }
@@ -18,7 +18,7 @@ describe "GuidingLights Module" do
     end
   end
 
-  describe "GuidingLights list" do
+  xdescribe "GuidingLights list" do
     it "gets a list of all published GuidingLights" do
       allow(allow(OpenURI).to receive(:open).and_return(hdoc = StringIO.new)).to receive(:read) { "TEST" }
       GuidingLights = GuidingLights.get_guides(api_url, site_id, api_key)

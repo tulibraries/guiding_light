@@ -19,7 +19,7 @@ describe "Libguides::Harvest" do
   end
 
   describe "convert LibGuide document to Solr document" do
-    it "converts a valid solr document" do
+    xit "converts a valid solr document" do
       doc_uri = File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml")
       expected_document = {"id" => Digest::MD5.hexdigest(doc_uri).to_s,
                            "body_t" => ["In the middle of the earth in the land of Shire",
@@ -34,7 +34,7 @@ describe "Libguides::Harvest" do
   end
 
   describe "To Solr core" do
-    it "ingests LibGuides into Solr-core" do
+    xit "ingests LibGuides into Solr-core" do
       solr_uri = 'http://localhost:8983/solr/blacklight-core'
       libguides_sitemap = "http://guides.temple.edu/sitemap.xml"
       GuidingLight::Harvest.harvest(libguides_sitemap, solr_uri)
@@ -47,7 +47,7 @@ describe "Libguides::Harvest" do
     let (:site_id) { 42 }
     let (:solr_uri) { 'http://localhost:8983/solr/blacklight-core' }
 
-    it "ingests all publsihed LibGuides with expanded pages into Solr-Core" do
+    xit "ingests all publsihed LibGuides with expanded pages into Solr-Core" do
       libguides = GuidingLight.get_guides(api_url, site_id, api_key)
 
     end
