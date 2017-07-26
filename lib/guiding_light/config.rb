@@ -16,7 +16,7 @@ module GuidingLight
     def initialize
       begin
         # load Gem config file if it exists
-        config = YAML.load_file(File.expand_path "config/libguides.yml")
+        config = YAML.load_file(File.expand_path "config/guiding_light.yml")
       rescue
         config = {}
       end

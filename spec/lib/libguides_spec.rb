@@ -1,16 +1,16 @@
 require 'spec_helper'
-require 'libguides'
+require 'guiding_light'
 
-describe "LibGuides Module" do
+describe "GuidingLights Module" do
   let (:api_key) { "FAKE API" }
   let (:api_url) { "http://lgapi-us.libapps.com/1.1/guides/" }
   let (:site_id) { 17 }
 
-  describe "LibGuide pages" do
+  describe "GuidingLight pages" do
     let (:guide_id) { 120253 }
-    it "gets list of pages from the libguide url" do
+    it "gets list of pages from the GuidingLight url" do
       allow(allow(OpenURI).to receive(:open).and_return(hdoc = StringIO.new)).to receive(:read) { "TEST" }
-      pages = Libguides.get_pages(api_url, site_id, guide_id, api_key)
+      pages = GuidingLights.get_pages(api_url, site_id, guide_id, api_key)
       expect(pages.any? { |p| p['name'] == "Home" }).to be
       expect(pages.any? { |p| p['name'] == "SketchUp" }).to be
       expect(pages.any? { |p| p['name'] == "Beyond SketchUp" }).to be
@@ -18,14 +18,14 @@ describe "LibGuides Module" do
     end
   end
 
-  describe "LibGuides list" do
-    it "gets a list of all published libguides" do
+  describe "GuidingLights list" do
+    it "gets a list of all published GuidingLights" do
       allow(allow(OpenURI).to receive(:open).and_return(hdoc = StringIO.new)).to receive(:read) { "TEST" }
-      libguides = Libguides.get_guides(api_url, site_id, api_key)
+      GuidingLights = GuidingLights.get_guides(api_url, site_id, api_key)
 
-      expect(libguides.any? { |lg| lg['status'] == "1" }).to be
-      expect(libguides.any? { |lg| lg['status'] == "0" }).to_not be
-      expect(libguides.any? { |lg| lg['status'] == "2" }).to_not be
+      expect(GuidingLights.any? { |lg| lg['status'] == "1" }).to be
+      expect(GuidingLights.any? { |lg| lg['status'] == "0" }).to_not be
+      expect(GuidingLights.any? { |lg| lg['status'] == "2" }).to_not be
     end
   end
 end

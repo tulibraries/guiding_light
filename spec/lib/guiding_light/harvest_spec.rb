@@ -1,8 +1,6 @@
 require 'spec_helper'
 require 'securerandom'
-require 'libguides'
-require 'guiding_light/harvest'
-require 'guiding_light/config'
+require 'guiding_light'
 
 describe "Libguides::Harvest" do
   let (:spec_api_key) { "SPEC_API_KEY" }
@@ -28,7 +26,7 @@ describe "Libguides::Harvest" do
                            "Lives a brave little hobbit whom we all admire",
                            "With his long wooden pipe fuzzy woolly toes",
                            "He lives in a hobbit hole and everybody knows him"].join(' ')}
-      actual_document = Libguides::Harvest.doc_to_solr(doc_uri.to_s)
+      actual_document = GuidingLight::Harvest.doc_to_solr(doc_uri.to_s)
       expect(actual_document["id"]).to match /#{expected_document["id"]}/
       expect(actual_document["body_t"]).to match /#{expected_document["body_t"]}/
     end
@@ -39,7 +37,7 @@ describe "Libguides::Harvest" do
     it "ingests LibGuides into Solr-core" do
       solr_uri = 'http://localhost:8983/solr/blacklight-core'
       libguides_sitemap = "http://guides.temple.edu/sitemap.xml"
-      Libguides::Harvest.harvest(libguides_sitemap, solr_uri)
+      GuidingLight::Harvest.harvest(libguides_sitemap, solr_uri)
     end
   end
 
@@ -50,7 +48,7 @@ describe "Libguides::Harvest" do
     let (:solr_uri) { 'http://localhost:8983/solr/blacklight-core' }
 
     it "ingests all publsihed LibGuides with expanded pages into Solr-Core" do
-      libguides = Libguides.get_guides(api_url, site_id, api_key)
+      libguides = GuidingLight.get_guides(api_url, site_id, api_key)
 
     end
   end
