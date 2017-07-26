@@ -19,16 +19,16 @@ describe "Libguides::Harvest" do
   end
 
   describe "convert LibGuide document to Solr document" do
-    xit "converts a valid solr document" do
+    it "converts a valid solr document" do
       doc_uri = File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml")
-      expected_document = {"id" => Digest::MD5.hexdigest(doc_uri).to_s,
+      expected_document = {"id" => doc_uri,
                            "body_t" => ["In the middle of the earth in the land of Shire",
                            "Lives a brave little hobbit whom we all admire",
                            "With his long wooden pipe fuzzy woolly toes",
                            "He lives in a hobbit hole and everybody knows him"].join(' ')}
       actual_document = GuidingLight::Harvest.doc_to_solr(doc_uri.to_s)
       expect(actual_document["id"]).to match /#{expected_document["id"]}/
-      expect(actual_document["body_t"]).to match /#{expected_document["body_t"]}/
+      expect(actual_document["text"]).to match /#{expected_document["body_t"]}/
     end
 
   end
