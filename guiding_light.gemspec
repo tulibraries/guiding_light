@@ -31,4 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'webmock'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'guard-rspec'
 end
