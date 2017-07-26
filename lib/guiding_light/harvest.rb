@@ -59,11 +59,15 @@ module GuidingLight::Harvest
     solr = RSolr.connect url: solr_endpoint
     libguides_sites.each_slice(batch_size) do |batch|
       batch_thread << Thread.new {
-        document_batch = []
-        batch.each do |item|
-          document_batch << ( doc_to_solr(item) )
+        begin
+          document_batch = []
+          batch.each do |item|
+            document_batch << ( doc_to_solr(item) )
+          end
+          solr.add document_batch, add_attributes: { commitWithin: 10 }
+        rescue Exception => e
+          puts "Ingest page failed: #{e.message}"
         end
-        solr.add document_batch, add_attributes: { commitWithin: 10 }
         progressbar.increment
       }
 
