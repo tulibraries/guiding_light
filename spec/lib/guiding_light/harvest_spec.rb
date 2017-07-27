@@ -32,24 +32,4 @@ describe "Libguides::Harvest" do
     end
 
   end
-
-  describe "To Solr core" do
-    xit "ingests LibGuides into Solr-core" do
-      solr_uri = 'http://localhost:8983/solr/blacklight-core'
-      libguides_sitemap = "http://guides.temple.edu/sitemap.xml"
-      GuidingLight::Harvest.harvest(libguides_sitemap, solr_uri)
-    end
-  end
-
-  describe "All Published LibGuides" do
-    let (:api_key) { "FAKE_API_KEY" }
-    let (:api_url) { "http://lgapi-us.libapps.com/1.1/guides/" }
-    let (:site_id) { 42 }
-    let (:solr_uri) { 'http://localhost:8983/solr/blacklight-core' }
-
-    xit "ingests all publsihed LibGuides with expanded pages into Solr-Core" do
-      libguides = GuidingLight.get_guides(api_url, site_id, api_key)
-
-    end
-  end
 end

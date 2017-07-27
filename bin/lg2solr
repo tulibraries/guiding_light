@@ -8,18 +8,6 @@ require "guiding_light"
 require "guiding_light/application_fields" if File.exists? File.expand_path(File.join("lib", "guiding_light", "application_fields.rb"))
 
 class Lg2Solr < Thor
-  desc "import URL", "Import single LibGuides document at URL to running Solr endpoint"
-  def import(libguides_url)
-    GuidingLight.configure
-    GuidingLight::Harvest.import(libguides_url)
-  end
-
-  desc "harvest URL", "Harvests LibGuides documents from LibGuides installation running Solr endpoint"
-  def harvest(libguides_site_map)
-    GuidingLight.configure
-    GuidingLight::Harvest.harvest_single(libguides_site_map)
-  end
-
   desc "harvest_all", "Harvests LibGuides based on parameters in configuration file"
   def harvest_all
     GuidingLight.configure

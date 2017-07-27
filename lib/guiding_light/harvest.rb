@@ -38,59 +38,6 @@ module GuidingLight::Harvest
     solr_doc
   end
 
-
-  def self.import(libguide_uri,
-                  solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
-    solr = RSolr.connect url: solr_endpoint
-    solr_doc = doc_to_solr(libguide_uri)
-    solr.add solr_doc, add_attributes: { commitWithin: 10 }
-    solr.commit
-  end
-
-  def self.harvest(libguides_sitemap,
-                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
-    sites_doc = Nokogiri::XML(open(libguides_sitemap))
-    libguides_sites = sites_doc.xpath('//xmlns:loc').map { |url| url.text }
-    batch_size = 10
-    batch_thread = []
-
-    puts "Harvesting #{libguides_sitemap}"
-    progressbar = ProgressBar.create(:title => "Harvest ", :total => 1 + (libguides_sites.count / batch_size), format: "%t (%c/%C) %a |%B|")
-    solr = RSolr.connect url: solr_endpoint
-    libguides_sites.each_slice(batch_size) do |batch|
-      batch_thread << Thread.new {
-        begin
-          document_batch = []
-          batch.each do |item|
-            document_batch << ( doc_to_solr(item) )
-          end
-          solr.add document_batch, add_attributes: { commitWithin: 10 }
-        rescue Exception => e
-          puts "Ingest page failed: #{e.message}"
-        end
-        progressbar.increment
-      }
-
-      solr.commit
-
-      puts "Awaiting completion"
-      batch_thread.each { |t| t.join }
-      puts "Done"
-    end
-  end
-
-  def self.harvest_single(libguides_sitemap,
-                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
-    sites_doc = Nokogiri::XML(open(libguides_sitemap))
-    libguides_sites = sites_doc.xpath('//xmlns:loc').map { |url| url.text }
-
-    progressbar = ProgressBar.create(:title => "Harvest ", :total => 1 + (libguides_sites.count), format: "%t (%c/%C) %a |%B|")
-    libguides_sites.each do |site|
-      import(site, solr_endpoint)
-      progressbar.increment
-    end
-  end
-
   def self.harvest_all
     config = GuidingLight.configuration
     log = Logger.new("log/harvest_libguides.log")
