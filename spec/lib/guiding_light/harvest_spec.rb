@@ -1,10 +1,8 @@
 require 'spec_helper'
 require 'securerandom'
-require 'libguides'
-require 'guiding_light/harvest'
-require 'guiding_light/config'
+require 'guiding_light'
 
-describe "Libguides::Harvest" do
+describe "GuidingLight::Harvest" do
   let (:spec_api_key) { "SPEC_API_KEY" }
   let (:spec_api_url) { 'http://lgapi-us.example.com/1.1/guides/b' }
   let (:spec_site_id) { "42" }
@@ -21,37 +19,56 @@ describe "Libguides::Harvest" do
   end
 
   describe "convert LibGuide document to Solr document" do
+    let (:doc_uri ) { File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml") }
+    let (:expected_document) {
+      {
+        "id" => doc_uri,
+        "text" => ["In the middle of the earth in the land of Shire",
+        "Lives a brave little hobbit whom we all admire",
+        "With his long wooden pipe fuzzy woolly toes",
+        "He lives in a hobbit hole and everybody knows him"].join(' ')
+      }
+    }
+    let (:metadata) {
+      {
+        "id"=>"312",
+        "type_id"=>"4",
+        "site_id"=>"17",
+        "owner_id"=>"213",
+        "group_id"=>"139",
+        "name"=>"Statistics-Health",
+        "description"=>"",
+        "redirect_url"=>"",
+        "status"=>"1",
+        "published"=>"2014-05-09 19:52:51",
+        "created"=>"2014-02-25 16:42:30",
+        "updated"=>"2017-06-27 15:24:54",
+        "slug_id"=>"1049303",
+        "friendly_url"=>"http://guides.temple.edu/healthstatistics",
+        "nav_type"=>"1",
+        "count_hit"=>"159",
+        "url"=>"http://guides.temple.edu/c.php?g=312",
+        "status_label"=>"Published",
+        "type_label"=>"Topic Guide"
+      }
+    }
+    
     it "converts a valid solr document" do
       doc_uri = File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml")
-      expected_document = {"id" => Digest::MD5.hexdigest(doc_uri).to_s,
+      expected_document = {"id" => doc_uri,
                            "body_t" => ["In the middle of the earth in the land of Shire",
                            "Lives a brave little hobbit whom we all admire",
                            "With his long wooden pipe fuzzy woolly toes",
                            "He lives in a hobbit hole and everybody knows him"].join(' ')}
-      actual_document = Libguides::Harvest.doc_to_solr(doc_uri.to_s)
+      actual_document = GuidingLight::Harvest.doc_to_solr(doc_uri.to_s)
       expect(actual_document["id"]).to match /#{expected_document["id"]}/
-      expect(actual_document["body_t"]).to match /#{expected_document["body_t"]}/
+      expect(actual_document["text"]).to match /#{expected_document["text"]}/
     end
-
-  end
-
-  describe "To Solr core" do
-    it "ingests LibGuides into Solr-core" do
-      solr_uri = 'http://localhost:8983/solr/blacklight-core'
-      libguides_sitemap = "http://guides.temple.edu/sitemap.xml"
-      Libguides::Harvest.harvest(libguides_sitemap, solr_uri)
-    end
-  end
-
-  describe "All Published LibGuides" do
-    let (:api_key) { "FAKE_API_KEY" }
-    let (:api_url) { "http://lgapi-us.libapps.com/1.1/guides/" }
-    let (:site_id) { 42 }
-    let (:solr_uri) { 'http://localhost:8983/solr/blacklight-core' }
-
-    it "ingests all publsihed LibGuides with expanded pages into Solr-Core" do
-      libguides = Libguides.get_guides(api_url, site_id, api_key)
-
+    
+    it "has libguide specific information" do
+      skip "[TODO] Need to implement a valid test"
+      expect(::GuidingLight::Harvest).to receive(:application_fields).with(kind_of(String), kind_of(String), metadata)
+      actual_document = GuidingLight::Harvest.doc_to_solr(doc_uri.to_s, doc_uri.to_s, metadata)
     end
   end
 end

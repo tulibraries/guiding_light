@@ -1,6 +1,5 @@
 require 'spec_helper'
-require 'libguides'
-require 'guiding_light/config'
+require 'guiding_light'
 
 describe "GuidingLight" do
   describe "#configure" do

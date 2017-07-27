@@ -8,7 +8,7 @@ require 'logger'
 require 'yaml'
 
 module GuidingLight::Harvest
-  def self.doc_to_solr(libguide_uri, doc_id = libguide_uri)
+  def self.doc_to_solr(libguide_uri, doc_id = libguide_uri, libguide_info = {})
     # Extract metadata and content
     libguide_doc = Nokogiri::HTML(GuidingLight::Request.get_doc(libguide_uri, :File, "cache/docs"))
     libguide_body = libguide_doc.css("#s-lg-guide-main").inner_text.gsub(/\t/, '').gsub(/\n/, '').gsub(/\r/,'').gsub(/\W+/, ' ')
@@ -28,63 +28,14 @@ module GuidingLight::Harvest
     solr_doc["subject_t"] = meta["DC.Subject"].split(',').map { |i| i.strip } if meta.key?("DC.Subject")
     solr_doc["language_facet"] = meta["DC.Language"] if meta.key?("DC.Language")
     solr_doc["link_facet"] = []
-    solr_doc = application_fields(solr_doc, libguide_doc)
+    solr_doc = application_fields(solr_doc, libguide_doc, libguide_info)
     solr_doc["url_fulltext_display"] = libguide_uri
     solr_doc["text"] = libguide_body
     solr_doc
   end
 
-  def self.application_fields(solr_doc, libguide_doc)
+  def self.application_fields(solr_doc, libguide_doc, libguide_info)
     solr_doc
-  end
-
-
-  def self.import(libguide_uri,
-                  solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
-    solr = RSolr.connect url: solr_endpoint
-    solr_doc = doc_to_solr(libguide_uri)
-    solr.add solr_doc, add_attributes: { commitWithin: 10 }
-    solr.commit
-  end
-
-  def self.harvest(libguides_sitemap,
-                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
-    sites_doc = Nokogiri::XML(open(libguides_sitemap))
-    libguides_sites = sites_doc.xpath('//xmlns:loc').map { |url| url.text }
-    batch_size = 10
-    batch_thread = []
-
-    puts "Harvesting #{libguides_sitemap}"
-    progressbar = ProgressBar.create(:title => "Harvest ", :total => 1 + (libguides_sites.count / batch_size), format: "%t (%c/%C) %a |%B|")
-    solr = RSolr.connect url: solr_endpoint
-    libguides_sites.each_slice(batch_size) do |batch|
-      batch_thread << Thread.new {
-        document_batch = []
-        batch.each do |item|
-          document_batch << ( doc_to_solr(item) )
-        end
-        solr.add document_batch, add_attributes: { commitWithin: 10 }
-        progressbar.increment
-      }
-
-      solr.commit
-
-      puts "Awaiting completion"
-      batch_thread.each { |t| t.join }
-      puts "Done"
-    end
-  end
-
-  def self.harvest_single(libguides_sitemap,
-                   solr_endpoint = 'http://localhost:8983/solr/blacklight-core' )
-    sites_doc = Nokogiri::XML(open(libguides_sitemap))
-    libguides_sites = sites_doc.xpath('//xmlns:loc').map { |url| url.text }
-
-    progressbar = ProgressBar.create(:title => "Harvest ", :total => 1 + (libguides_sites.count), format: "%t (%c/%C) %a |%B|")
-    libguides_sites.each do |site|
-      import(site, solr_endpoint)
-      progressbar.increment
-    end
   end
 
   def self.harvest_all
@@ -97,7 +48,16 @@ module GuidingLight::Harvest
     puts "Using Solr url #{config.solr_url}"
     pages = []
     libguides_sites = GuidingLight::Request.get_guides(config.api_url, config.site_id, config.api_key)
-    pages = libguides_sites.map { |lg| lg['pages'] }.flatten
+    # Extract each libguide's page
+    pages = libguides_sites.map { |lg|
+      # Insert LibGuides response into each page
+      metadata = lg.dup
+      metadata.delete("pages")
+      lg["pages"].each do |p|
+        p["libguide_info"] = metadata
+      end
+      lg['pages']
+    }.flatten
     #
     # Ingest guides
     #
@@ -108,7 +68,7 @@ module GuidingLight::Harvest
       page_batch = []
       batch.each do |p|
         begin
-          page_batch << doc_to_solr(p['url'], p['id'])
+          page_batch << doc_to_solr(p['url'], p['id'], p['libguide_info'])
         rescue Exception => e
           log.error "Ingest page failed: #{e.message}"
         end
