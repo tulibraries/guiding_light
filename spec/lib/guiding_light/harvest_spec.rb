@@ -52,23 +52,29 @@ describe "GuidingLight::Harvest" do
         "type_label"=>"Topic Guide"
       }
     }
+
+    let (:solr_doc) { {
+      "id" => doc_uri,
+      "body_t" => ["In the middle of the earth in the land of Shire",
+      "Lives a brave little hobbit whom we all admire",
+      "With his long wooden pipe fuzzy woolly toes",
+      "He lives in a hobbit hole and everybody knows him"].join(' ')
+    } }
     
     it "converts a valid solr document" do
       doc_uri = File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml")
-      expected_document = {"id" => doc_uri,
-                           "body_t" => ["In the middle of the earth in the land of Shire",
-                           "Lives a brave little hobbit whom we all admire",
-                           "With his long wooden pipe fuzzy woolly toes",
-                           "He lives in a hobbit hole and everybody knows him"].join(' ')}
+      expected_document = solr_doc
       actual_document = GuidingLight::Harvest.doc_to_solr(doc_uri.to_s)
       expect(actual_document["id"]).to match /#{expected_document["id"]}/
       expect(actual_document["text"]).to match /#{expected_document["text"]}/
     end
     
     it "has libguide specific information" do
-      skip "[TODO] Need to implement a valid test"
-      expect(::GuidingLight::Harvest).to receive(:application_fields).with(kind_of(String), kind_of(String), metadata)
+      allow(::GuidingLight::Harvest).to receive(:application_fields).with(any_args) { 
+        solr_doc.tap { |doc| doc["publishing_status"] = metadata["status_label"] }
+      } 
       actual_document = GuidingLight::Harvest.doc_to_solr(doc_uri.to_s, doc_uri.to_s, metadata)
+      expect(actual_document["publishing_status"]).to match /#{metadata["status_label"]}/
     end
   end
 end
