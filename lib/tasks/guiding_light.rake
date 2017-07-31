@@ -20,5 +20,9 @@ namespace :guiding_light do
     GuidingLight::Harvest.harvest_all
   end
 
+  desc 'Remove unpublished and private LibGuides'
+  task :cull do
+    GuidingLight::Harvest.cull
+  end
 
 end

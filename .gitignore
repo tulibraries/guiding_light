@@ -1,6 +1,6 @@
 Gemfile.lock
 cache/
 log/
-config/libguides.yml
+config/guiding_light.yml
 *.gem
 coverage/

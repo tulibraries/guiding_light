@@ -28,6 +28,5 @@ module GuidingLight::Request
   def self.get_guides(api_url, site_id, api_key)
     url = "#{api_url}?site_id=#{site_id}?&key=#{api_key}&expand=pages"
     sites = JSON.parse(get_doc(url, :YAML, "cache/guides.yml"))
-    published_sites = sites.select { |s| s['status'] == '1' }
   end
 end
