@@ -1,0 +1,14 @@
+language: ruby
+sudo: false
+rvm:
+- 2.3.1
+env:
+- TZ=America/New_York
+notifications:
+  email:
+    recipients:
+    - chad.nelson@temple.edu
+    - steven.ng@temple.edu
+    on_success: change
+    on_failure: always
+

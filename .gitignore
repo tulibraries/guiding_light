@@ -3,3 +3,4 @@ cache/
 log/
 config/libguides.yml
 *.gem
+coverage/

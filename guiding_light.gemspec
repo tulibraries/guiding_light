@@ -26,10 +26,13 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'thor', '~> 0.19'
   s.add_runtime_dependency 'moneta', '~> 1.0'
 
+  s.add_development_dependency 'bundler', '~> 1.13'
+  s.add_development_dependency 'rake', '~> 10.0'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'solr_wrapper'
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'webmock'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'coveralls'
 end
