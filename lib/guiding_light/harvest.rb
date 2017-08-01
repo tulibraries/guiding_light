@@ -88,11 +88,9 @@ module GuidingLight::Harvest
     solr = RSolr.connect url: config.solr_url
     libguide_sites = get_unpublished(GuidingLight::Request.get_guides(config.api_url, config.site_id, config.api_key))
 
-    progressbar = ProgressBar.create(:title => "Cull", :total => libguide_sites.count, format: "%t (%c/%C) %a |%B|")
     page_ids = libguide_sites.map do|lg|
       pages = lg['pages'].map { |p| p['id'] }
       response = solr.delete_by_id pages
-      progressbar.increment
     end
     solr.commit
   end
