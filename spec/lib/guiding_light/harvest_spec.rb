@@ -77,4 +77,7 @@ describe "GuidingLight::Harvest" do
       expect(actual_document["publishing_status"]).to match /#{metadata["status_label"]}/
     end
   end
+
+  it "removes libguides that have become unpublished"
+  it "removes libguides that have become priviate"
 end
