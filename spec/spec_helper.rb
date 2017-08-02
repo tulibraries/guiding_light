@@ -16,6 +16,8 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'pry'
+require 'awesome_print'
 require 'simplecov'
 require 'coveralls'
 Coveralls.wear!
@@ -107,3 +109,4 @@ RSpec.configure do |config|
   config.add_setting :fixtures_path
   config.fixtures_path = "spec/fixtures"
 end
+

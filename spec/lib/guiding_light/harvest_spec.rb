@@ -20,15 +20,7 @@ describe "GuidingLight::Harvest" do
 
   describe "convert LibGuide document to Solr document" do
     let (:doc_uri ) { File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml") }
-    let (:expected_document) {
-      {
-        "id" => doc_uri,
-        "text" => ["In the middle of the earth in the land of Shire",
-        "Lives a brave little hobbit whom we all admire",
-        "With his long wooden pipe fuzzy woolly toes",
-        "He lives in a hobbit hole and everybody knows him"].join(' ')
-      }
-    }
+
     let (:metadata) {
       {
         "id"=>"312",
@@ -60,7 +52,7 @@ describe "GuidingLight::Harvest" do
       "With his long wooden pipe fuzzy woolly toes",
       "He lives in a hobbit hole and everybody knows him"].join(' ')
     } }
-    
+
     it "converts a valid solr document" do
       doc_uri = File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml")
       expected_document = solr_doc
@@ -78,6 +70,40 @@ describe "GuidingLight::Harvest" do
     end
   end
 
-  it "removes libguides that have become unpublished"
-  it "removes libguides that have become priviate"
+  context "When the status of a libguide changes" do
+    let (:libguides) {
+      YAML.load_file(File.join(File.expand_path(RSpec.configuration.fixtures_path), "libguide.yml"))
+    }
+
+    let (:page1) {
+      doc_path = File.join(File.expand_path(RSpec.configuration.fixtures_path), "test.xml")
+      doc = open(doc_path).read
+    } 
+
+    let (:page2) {
+      doc_path = File.join(File.expand_path(RSpec.configuration.fixtures_path), "test2.xml")
+      doc = open(doc_path).read
+    } 
+    
+    it "removes libguides that have become unpublished" do
+      allow(GuidingLight::Request).to receive(:get_doc).with(any_args) {
+        libguides.first["pages"].first
+      }
+
+      allow(GuidingLight::Request).to receive(:get_guides).with(any_args) {
+        libguides
+      }
+
+      GuidingLight::Harvest.harvest_all    
+      solr = RSolr.connect url: spec_solr_url
+      query = %Q(id:#{libguides.first["pages"].first["id"]})
+      puts %Q(Got #{libguides.first["pages"].first["id"]})
+      response = solr.get 'select', :params => {:q => query}
+      binding.pry
+        # add the document
+        # Unpublish the document
+    end
+
+    it "removes libguides that have become private"
+  end
 end
