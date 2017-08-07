@@ -80,6 +80,26 @@ module GuidingLight::Harvest
     solr.commit
     batch_thread.each { |t| t.join }
   end
-  puts
 
+  def self.delete_all
+    config = GuidingLight.configuration
+    log = Logger.new("log/harvest_libguides.log")
+    begin
+      solr = RSolr.connect url: config.solr_url
+      solr.delete_by_query '*:*'
+    rescue Exception => e
+      log.error "Delete all failed: #{e.message}"
+    end
+  end
+
+  def self.commit
+    config = GuidingLight.configuration
+    log = Logger.new("log/harvest_libguides.log")
+    begin
+      solr = RSolr.connect url: config.solr_url
+      solr.commit commit_attributes: {expungeDeletes: true, softCommit: false}
+    rescue Exception => e
+      log.error "Solr commit failed: #{e.message}"
+    end
+  end
 end

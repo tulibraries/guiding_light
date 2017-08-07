@@ -13,6 +13,18 @@ class Lg2Solr < Thor
     GuidingLight.configure
     GuidingLight::Harvest.harvest_all
   end
+
+  desc "delete_all", "Delete all LibGuides based on parameters in configuration file"
+  def delete_all
+    GuidingLight.configure
+    GuidingLight::Harvest.delete_all
+  end
+
+  desc "commit", "Commits all pending Solr transactions"
+  def commit
+    GuidingLight.configure
+    GuidingLight::Harvest.commit
+  end
 end
 
 Lg2Solr.start(ARGV)

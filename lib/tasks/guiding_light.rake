@@ -20,5 +20,14 @@ namespace :guiding_light do
     GuidingLight::Harvest.harvest_all
   end
 
+  desc "Delete All Collections"
+  task :delete_all do
+    GuidingLight::Harvest.delete_all
+  end
+
+  desc "Commit Solr Transactions"
+  task :commit do
+    GuidingLight::Harvest.commit
+  end
 
 end
