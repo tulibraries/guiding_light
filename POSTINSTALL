@@ -1,0 +1,23 @@
+Final Configuration Steps:
+Edit config/guiding_light.example.yml and save to config/guiding_light.yml
+
+===============================================================================
+
+Some setup you must do manually if you haven't yet:
+
+  1. Create a Guiding Light configuration file:
+
+      cp config/guiding_light.example.yml config/guiding_light.yml
+
+  2. Edit config/guiding_light.yml to match your LibGuides and Solr
+     configuration:
+
+     Replace
+       api_key:  with your LibGuides API key
+       api_url:  with the URL to access the LibGuides API
+       site_id:  LibGuides Site ID Number
+       solr_url: Solr Entry Point (a URL)
+       solr_batch_size: Number of libguide pages to process per batch.
+                        100 recommended.
+
+===============================================================================

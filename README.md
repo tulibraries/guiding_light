@@ -16,6 +16,8 @@ Guiding Light will need to know:
 
 ### Install Guiding Light
 
+There are two ways to install Guiding Light
+
 Guiding Light installs as a Ruby Gem:
 
 `gem install guiding_light`
@@ -28,6 +30,9 @@ Then from the command line, install Guiding Light:
 
 `bundle install`
 
+OR -- Do it in one step
+
+`rails new app -m https://raw.githubusercontent.com/tulibraries/guiding_light/master/template.rb`
 
 ### Configure Guiding Light
 
