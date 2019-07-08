@@ -15,6 +15,11 @@ namespace :guiding_light do
     Rake::Task["guiding_light:harvest_all_gem"].invoke
   end
 
+  desc "To Csv"
+  task :harvest_to_csv do
+    GuidingLight::Harvest.lg_to_csv
+  end
+
   #desc "Task called from the gem itself"
   task :harvest_all_gem do
     GuidingLight::Harvest.harvest_all

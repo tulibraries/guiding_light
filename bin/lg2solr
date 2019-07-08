@@ -14,6 +14,12 @@ class Lg2Solr < Thor
     GuidingLight::Harvest.harvest_all
   end
 
+  desc "to_csv", "LIbguides to CSV"
+  def to_csv
+    GuidingLight.configure
+    GuidingLight::Harvest.lg_to_csv
+  end
+
   desc "delete_all", "Delete all LibGuides based on parameters in configuration file"
   def delete_all
     GuidingLight.configure
