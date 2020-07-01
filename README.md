@@ -32,7 +32,7 @@ Then from the command line, install Guiding Light:
 
 OR -- Do it in one step
 
-`rails new app -m https://raw.githubusercontent.com/tulibraries/guiding_light/master/template.rb`
+`rails new app -m https://raw.githubusercontent.com/tulibraries/guiding_light/main/template.rb`
 
 ### Configure Guiding Light
 
